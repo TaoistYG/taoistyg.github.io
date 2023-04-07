@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | TaoistYang的博客</title>
+  <title>详解Vue双向绑定 | TaoistYang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="碎片收集。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TaoistYang的博客">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="MVVM模式MVVM（Model-View-ViewModel）是对 MVC（Model-View-Control）和 MVP（Model-View-Presenter）的进一步改进  View：视图层（UI 用户界面）ViewModel：业务逻辑层（一切 js 可视为业务逻辑，也就是前端的日常工作）Model：数据层（存储数据及对数据的处理如增删改查）   MVVM 将数据双向绑定（data-b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解Vue双向绑定">
+<meta property="og:url" content="http://example.com/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/index.html">
 <meta property="og:site_name" content="TaoistYang的博客">
-<meta property="og:description" content="碎片收集。">
+<meta property="og:description" content="MVVM模式MVVM（Model-View-ViewModel）是对 MVC（Model-View-Control）和 MVP（Model-View-Presenter）的进一步改进  View：视图层（UI 用户界面）ViewModel：业务逻辑层（一切 js 可视为业务逻辑，也就是前端的日常工作）Model：数据层（存储数据及对数据的处理如增删改查）   MVVM 将数据双向绑定（data-b">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/statics/img/mvvm.png">
+<meta property="article:published_time" content="2023-03-22T08:43:06.000Z">
+<meta property="article:modified_time" content="2023-04-07T09:31:28.321Z">
 <meta property="article:author" content="TaoistYang">
 <meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/statics/img/mvvm.png">
   
     <link rel="alternative" href="/atom.xml" title="TaoistYang的博客" type="application/atom+xml">
   
@@ -147,184 +151,185 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-详解Vue双向绑定" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-04-07T09:31:28.320Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/">React脑图整理</a>
+    <h1 class="article-title" itemprop="name">
+      详解Vue双向绑定
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="archive-article-date">
+        
+        <a href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="archive-article-date">
   	<time datetime="2023-03-22T08:43:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">详解Vue双向绑定</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="MVVM模式"><a href="#MVVM模式" class="headerlink" title="MVVM模式"></a>MVVM模式</h3><p>MVVM（Model-View-ViewModel）是对 MVC（Model-View-Control）和 MVP（Model-View-Presenter）的进一步改进</p>
+<blockquote>
+<p>View：视图层（UI 用户界面）<br>ViewModel：业务逻辑层（一切 js 可视为业务逻辑，也就是前端的日常工作）<br>Model：数据层（存储数据及对数据的处理如增删改查）</p>
+</blockquote>
+<ul>
+<li>MVVM 将数据双向绑定（data-binding）作为核心思想，View 和 Model 之间没有联系，它们通过 ViewModel这个桥梁进行交互</li>
+<li>View 的变化会自动同步到 Model，而 Model的变化也会立即反映到 View 上显示</li>
+<li>当用户操作 View，ViewModel 感知到变化，然后通知 Model 发生相应改变；反之当 Model 发生改变，ViewModel也能感知到变化，使 View 作出相应更新</li>
+</ul>
+<p><img src="/../statics/img/mvvm.png" alt="mvvm"></p>
+<p>核心：双向绑定<br>原理：数据劫持+发布订阅模式相结合<br>解释：数据层发生变化的时候，可同布更新视图层，当视图层发生变化的时候，同步更新数据层</p>
+<h3 id="双向绑定核心-Object-defineProperty"><a href="#双向绑定核心-Object-defineProperty" class="headerlink" title="双向绑定核心 Object.defineProperty()"></a>双向绑定核心 Object.defineProperty()</h3><p>Object.defineProperty(obj, prop, descriptor) 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+<blockquote>
+<p>obj：要定义属性的对象<br>prop：要定义或修改的属性的名称或 Symbol<br>descriptor：要定义或修改的属性描述符<br>返回值：被传递给函数的对象</p>
+</blockquote>
+<p>通过Object.defineProperty的get方法用来获取值 set方法用来拦截设置值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, <span class="string">&#x27;val&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;获取对象的值&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;设置对象的新值&#x27;</span> + newVal)</span><br><span class="line">        val = newVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简化版双向绑定input</span></span><br><span class="line"><span class="comment">// html</span></span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> id=<span class="string">&quot;app&quot;</span> /&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;child&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">// js</span></span><br><span class="line"><span class="language-xml">var initialValue = &#x27;&#x27;;</span></span><br><span class="line"><span class="language-xml">var obj = &#123;&#125;;</span></span><br><span class="line"><span class="language-xml">Object.defineProperty(obj, &#x27;initialValue&#x27;, &#123;</span></span><br><span class="line"><span class="language-xml">    get() &#123;</span></span><br><span class="line"><span class="language-xml">        return initialValue</span></span><br><span class="line"><span class="language-xml">    &#125;</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">    set(newVal) &#123;</span></span><br><span class="line"><span class="language-xml">        initialValue = newVal;</span></span><br><span class="line"><span class="language-xml">        document.getElementId(&#x27;child&#x27;).innerHTML = initialValue</span></span><br><span class="line"><span class="language-xml">    &#125;</span></span><br><span class="line"><span class="language-xml">&#125;)</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">document.addEventListener(&#x27;keyup&#x27;, function(e) &#123;</span></span><br><span class="line"><span class="language-xml">    obj.initialValue = e.target.value;</span></span><br><span class="line"><span class="language-xml">&#125;)</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="结合发布订阅模式，实现vue双向数据绑定"><a href="#结合发布订阅模式，实现vue双向数据绑定" class="headerlink" title="结合发布订阅模式，实现vue双向数据绑定"></a>结合发布订阅模式，实现vue双向数据绑定</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">&quot;X-UA-Compatible&quot;</span> content=<span class="string">&quot;IE=edge&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="built_in">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><br><span class="line">        测试双向绑定demo</span><br><span class="line">        &lt;input <span class="built_in">type</span>=<span class="string">&quot;text&quot;</span> v-model=<span class="string">&quot;text&quot;</span> /&gt;&#123;&#123;text&#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">    /** </span><br><span class="line">        第一步：实现Vue构造函数，拦截dom并找到vue实例中data对应是数据，渲染到页面上。</span><br><span class="line">        涉及 =&gt; compile、nodeToFragment、vue</span><br><span class="line">     */</span><br><span class="line">    // 编译函数</span><br><span class="line">    <span class="keyword">function</span> compile(node, vm) &#123;</span><br><span class="line">        var reg = /\&#123;\&#123;(.*)\&#125;\&#125;/; // 匹配&#123;&#123;xxx&#125;&#125;中的xxx</span><br><span class="line"></span><br><span class="line">        // 元素节点</span><br><span class="line">        <span class="keyword">if</span>(node.nodeType === 1) &#123;</span><br><span class="line">            var attr = node.attributes;</span><br><span class="line">            // 解析元素节点所有属性</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; attr.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(attr[i].nodeName === <span class="string">&#x27;v-model&#x27;</span>) &#123;</span><br><span class="line">                    var name = attr[i].nodeValue // 看看是与哪个数据关联</span><br><span class="line">                    node.addEventListener(<span class="string">&#x27;input&#x27;</span>, <span class="keyword">function</span>(e) &#123;</span><br><span class="line">                        vm[name] = e.target.value</span><br><span class="line">                    &#125;)</span><br><span class="line">                    node.value = vm.data[name] // 将data的值赋予node</span><br><span class="line">                    node.removeAttribute(<span class="string">&#x27;v-model&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 文本节点</span><br><span class="line">        <span class="keyword">if</span>(node.nodeType === 3) &#123;</span><br><span class="line">            <span class="keyword">if</span>(reg.test(node.nodeValue)) &#123;</span><br><span class="line">                var name = RegExp.<span class="variable">$1</span>; // 获取匹配字符串</span><br><span class="line">                name = name.trim();</span><br><span class="line">                node.nodeValue = vm[name]; // data赋值给node</span><br><span class="line">                new Watcher(vm, node, name); // 绑定订阅者</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 碎片化文档中处理添加节点</span><br><span class="line">    <span class="keyword">function</span> nodeToFragment(node, vm) &#123;</span><br><span class="line">        var fragment = document.createDocumentFragment();</span><br><span class="line">        var child;</span><br><span class="line">        <span class="keyword">while</span>(child = node.firstChild) &#123;</span><br><span class="line">            compile(child, vm);</span><br><span class="line">            fragment.appendChild(child);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> fragment;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Vue构造函数</span><br><span class="line">    // 观察data中所有属性值，注意增添observe</span><br><span class="line">    <span class="keyword">function</span> Vue(options) &#123;</span><br><span class="line">        this.data = options.data;</span><br><span class="line">        observe(this.data, this)</span><br><span class="line">        var <span class="built_in">id</span> = options.el;</span><br><span class="line">        var dom = nodeToFragment(document.getElementById(<span class="built_in">id</span>), this)</span><br><span class="line"></span><br><span class="line">        // 处理完所有节点后，重新添加内容</span><br><span class="line">        document.getElementById(<span class="built_in">id</span>).appendChild(dom)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">        第二步，拦截data对象的所有属性，这样会在setter函数中监听到变化</span><br><span class="line">    */</span><br><span class="line">    // 实现观察者，对于一个实例，每一个属性值都进行观察</span><br><span class="line">    <span class="keyword">function</span> observe(obj, vm) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">let</span> key of Object.keys(obj)) &#123;</span><br><span class="line">            defineReactive(vm, key, obj[key]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 实现响应式监听属性的函数。赋新值发生变化</span><br><span class="line">    <span class="keyword">function</span> defineReactive(obj, key, val) &#123;</span><br><span class="line">        var dep = new Dep(); // 观察者实例</span><br><span class="line">        Object.defineProperty(obj, key, &#123;</span><br><span class="line">            get: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">                <span class="keyword">if</span>(Dep.target) &#123; // 每个观察者唯一</span><br><span class="line">                    dep.addSub(Dep.target)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">return</span> val</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">            <span class="built_in">set</span>: <span class="keyword">function</span>(newVal) &#123;</span><br><span class="line">                <span class="keyword">if</span>(newVal === val) &#123;</span><br><span class="line">                    <span class="built_in">return</span></span><br><span class="line">                &#125;</span><br><span class="line">                val = newVal; // 新值</span><br><span class="line">                // 更新后立即通知</span><br><span class="line">                dep.notify();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">        将发布者和订阅者关联起来,通过将每一个Watcher实例赋值给Deptarget的全局变量，</span><br><span class="line">        这样Watcher和Dep就有关系了，当操作完成了就需要将Dep.target置为空 </span><br><span class="line">        这样保证了Watcher实例的唯一性</span><br><span class="line">    */</span><br><span class="line">    // Watcher 监听者</span><br><span class="line">    <span class="keyword">function</span> Watcher(vm, node, name) &#123;</span><br><span class="line">        Dep.target = this;</span><br><span class="line">        this.vm = vm;</span><br><span class="line">        this.node = node;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.update();</span><br><span class="line">        Dep.target = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Watcher.prototype = &#123;</span><br><span class="line">        <span class="function"><span class="title">update</span></span>() &#123;</span><br><span class="line">            this.get();</span><br><span class="line">            this.node.nodeValue = this.value; // 更改节点内容的关键</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">get</span></span>() &#123;</span><br><span class="line">            this.value = this.vm[this.name] // 触发相应的get</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">        第三步，通过发布订阅模式串联，通知数据更新，重新渲染</span><br><span class="line">    */</span><br><span class="line">    // dep构造函数</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">Dep</span></span>() &#123;</span><br><span class="line">        this.subs = [] // 观察者添加订阅者</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Dep.prototype = &#123;</span><br><span class="line">        // 添加订阅者</span><br><span class="line">        addSub(sub) &#123;</span><br><span class="line">            this.subs.push(sub)</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        // 发布通知</span><br><span class="line">        <span class="function"><span class="title">notify</span></span>() &#123;</span><br><span class="line">            this.subs.forEach(<span class="keyword">function</span>(sub) &#123;</span><br><span class="line">                sub.update();</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var vm = new Vue(&#123;</span><br><span class="line">        el: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            text: <span class="string">&#x27;赵灵儿&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2023-02-27T08:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-27</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          React脑图整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">create-react-app 使用相关知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">create-react-app 使用相关知识</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-02-13T01:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">知识点整理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/06/React-Hooks/" class="archive-article-date">
-  	<time datetime="2023-02-06T03:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/06/React-Hooks/">React Hooks</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/02/hexo%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2023-02-02T11:30:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/02/hexo%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">hexo基础命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -347,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
