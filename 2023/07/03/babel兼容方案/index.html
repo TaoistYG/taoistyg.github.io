@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | TaoistYang的博客</title>
+  <title>babel兼容方案 | TaoistYang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="碎片收集。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TaoistYang的博客">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="core-jscore-js是JavaScript的模块化标准库，包括了ECMAScript到2021年的新api的向后兼容实现。「它和babel高度集成，是babel解决新特性在浏览器中兼容问题的核心依赖」。目前core-js的版本是3.x，与core-js@2相比不仅在本身的架构上有重大调整，还对babel中的一些插件有重大影响 core-js@2core-js@2被@babel&#x2F;p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="babel兼容方案">
+<meta property="og:url" content="http://example.com/2023/07/03/babel%E5%85%BC%E5%AE%B9%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="TaoistYang的博客">
-<meta property="og:description" content="碎片收集。">
+<meta property="og:description" content="core-jscore-js是JavaScript的模块化标准库，包括了ECMAScript到2021年的新api的向后兼容实现。「它和babel高度集成，是babel解决新特性在浏览器中兼容问题的核心依赖」。目前core-js的版本是3.x，与core-js@2相比不仅在本身的架构上有重大调整，还对babel中的一些插件有重大影响 core-js@2core-js@2被@babel&#x2F;p">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/statics/%E5%85%B6%E4%BB%96/babel.jpg">
+<meta property="article:published_time" content="2023-07-03T08:06:50.000Z">
+<meta property="article:modified_time" content="2023-07-03T08:36:14.565Z">
 <meta property="article:author" content="TaoistYang">
 <meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/statics/%E5%85%B6%E4%BB%96/babel.jpg">
   
     <link rel="alternative" href="/atom.xml" title="TaoistYang的博客" type="application/atom+xml">
   
@@ -147,400 +151,237 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-babel兼容方案" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      babel兼容方案
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/03/babel%E5%85%BC%E5%AE%B9%E6%96%B9%E6%A1%88/" class="archive-article-date">
+
+        
+        <a href="/2023/07/03/babel%E5%85%BC%E5%AE%B9%E6%96%B9%E6%A1%88/" class="archive-article-date">
   	<time datetime="2023-07-03T08:06:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/03/babel%E5%85%BC%E5%AE%B9%E6%96%B9%E6%A1%88/">babel兼容方案</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="core-js"><a href="#core-js" class="headerlink" title="core-js"></a>core-js</h3><p>core-js是JavaScript的模块化标准库，包括了ECMAScript到2021年的新api的向后兼容实现。「<strong>它和babel高度集成，是babel解决新特性在浏览器中兼容问题的核心依赖</strong>」。目前core-js的版本是3.x，与core-js@2相比不仅在本身的架构上有重大调整，还对babel中的一些插件有重大影响</p>
+<h4 id="core-js-2"><a href="#core-js-2" class="headerlink" title="core-js@2"></a>core-js@2</h4><p>core-js@2被@babel&#x2F;polyfill、@babel&#x2F;preset-env和@babel&#x2F;runtime-corejs2引入来进行新api的兼容处理，其中有两个核心的模块</p>
+<ul>
+<li>library：不污染全局的runtime模块，供@babel&#x2F;runtime-corejs2引入</li>
+<li>modules：污染全局的polyfill模块，供@babel&#x2F;polyfill和@babel&#x2F;preset-env引入</li>
+</ul>
+<p>ps: 不污染全局的runtime模块主要是采用模拟替换api的方式解决兼容性问题；污染全局的polyfill模块主要是采用在全局和实例上添加api的方式解决兼容性问题</p>
+<h4 id="core-js-3"><a href="#core-js-3" class="headerlink" title="core-js@3"></a>core-js@3</h4><p>core-js@3放弃了对@babel&#x2F;polyfill的支持，被@babel&#x2F;preset-env和@babel&#x2F;runtime-corejs3引入来进行新api的兼容处理。由于core-js@2包的体积太大（约2M），并且有很多重复的文件被引用。所以，core-js@3对包进行拆分，其中两个核心的包分别是</p>
+<ul>
+<li>core-js[2]：污染全局的polyfill包，供@babel&#x2F;preset-env使用，执行npm i core-js时安装，等价于core-js@2中的core-js&#x2F;modules</li>
+<li>core-js-pure[3]：不污染全局的runtime包，供@babel&#x2F;runtime-corejs3使用，在安装@babel&#x2F;runtime-corejs3的时候自动安装，等价于core-js@2中的core-js&#x2F;library</li>
+</ul>
+<p>ps: core-js@2分支已经冻结，不会再添加新特性，新特性都会添加到core-js@3。例如你使用了 Array.prototype.flat()，如果你使用的是core-js@2，那么其不包含此新特性。但是你仍然可以在core-js@3的基础上使用core-js@2的功能。为了可以使用更多的新特性，建议大家使用core-js@3。关于core-js的内容大家先了解这么多，先有个印象，大家只需要记住一点: 「<strong>corejs才是api兼容实现的提供者！</strong></p>
+<h3 id="babel-x2F-preset-env"><a href="#babel-x2F-preset-env" class="headerlink" title="@babel&#x2F;preset-env"></a>@babel&#x2F;preset-env</h3><p>babel运行总共分为三个阶段：「解析」、「转换」、「生成」</p>
+<p><img src="/../statics/%E5%85%B6%E4%BB%96/babel.jpg" alt="流程"></p>
+<p>babel自6.0起，就不再对代码进行transform，现在只负责上图中的parse和generate过程，代码的transform过程全都交给一个个plugin去做。所以在没有配置任何plugin的情况下，经过babel输出的代码是没有改变的。有的环境下可能需要转换几十种不同语法的代码，则需要配置几十个plugin，这显然会非常繁琐。所以，为了解决这种问题，babel提供了预设插件机制preset，preset中可以「预设置一组插件来便捷的使用这些插件所提供的功能」。目前，babel官方推荐使用@babel&#x2F;preset-env预设插件</p>
+<p>@babel&#x2F;preset-env「主要的作用是用来转换那些已经被正式纳入TC39中的语法」。所以它无法对那些还在提案中的语法进行处理，对于处在stage中的语法，需要安装对应的plugin进行处理</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;presets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">[</span><span class="string">&quot;@babel/preset-env&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>除了语法转换，@babel&#x2F;preset-env另一个重要的功能是「对api的处理，也就是在代码中引入polyfill」。@babel&#x2F;preset-env主要是依赖core-js来处理api的兼容性，所以需要事先安装core-js。当设置了useBuiltIns选项（不为false）时，就会使用core-js来对api进行处理。@babel&#x2F;preset-env在升级到7.4.0以上的版本以后，既支持core-js@2，也支持core-js@3，所以增加了corejs的配置来控制所需的版本。「如果设置了useBuiltIns选项（不为false）就得设置corejs版本，否则babel将会发出警告」</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// useBuiltIns =&gt; babel7的新功能，这个配置提供了三个选项告诉babel该如何引入polyfill包</span></span><br><span class="line">    <span class="attr">&quot;presets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;@babel/preset-env&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;useBuiltIns&quot;</span><span class="punctuation">:</span> <span class="string">&quot;usage&quot;</span><span class="punctuation">,</span> <span class="comment">// 也可配置成 entry，配置为 false 则不需要配置 corejs </span></span><br><span class="line">            <span class="attr">&quot;corejs&quot;</span><span class="punctuation">:</span> <span class="number">3</span> <span class="comment">// 也可配置成 2</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="useBuiltIns-参数设置"><a href="#useBuiltIns-参数设置" class="headerlink" title="useBuiltIns 参数设置"></a>useBuiltIns 参数设置</h4><ul>
+<li>usage 「代码中不用主动import」，babel会自动将代码里已使用到的且browserslist环境不支持的polyfill导入</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编译前</span></span><br><span class="line"><span class="keyword">const</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="title function_">resolve</span>(<span class="number">123</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//编译后</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;core-js/modules/es.array.copy-within.js&quot;</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;core-js/modules/es.object.to-string.js&quot;</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;core-js/modules/es.promise.js&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line"><span class="title function_">resolve</span>(<span class="number">123</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>entry 「需要在代码运行之前导入」，会将browserslist环境不支持的所有polyfill都导入。这样babel就只会在入口处导入所有polyfill，不会在代码再单独添加polyfill代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编译前</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;core-js/stable&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;regenerator-runtime/runtime&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//编译后</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;core-js/modules/es.symbol.js&quot;</span>);</span><br><span class="line"><span class="comment">// ... 此处省略400+行代码</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;regenerator-runtime/runtime&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>false 只做了语法转换，不会导入任何polyfill进来，并且corejs配置将无效</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编译前</span></span><br><span class="line"><span class="keyword">const</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="number">123</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> shen = result?.<span class="property">a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译后</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> shen = result === <span class="literal">null</span> || result === <span class="keyword">void</span> <span class="number">0</span> ? <span class="keyword">void</span> <span class="number">0</span> : result.<span class="property">a</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-x2F-polyfill"><a href="#babel-x2F-polyfill" class="headerlink" title="@babel&#x2F;polyfill"></a>@babel&#x2F;polyfill</h3><p>@babel&#x2F;polyfill是一个运行时包，主要是通过核心依赖core-js@2「来完成对应浏览器不支持的新的全局和实例api的添加」。在升级到core-js@3后，如果还要保留@babel&#x2F;polyfill的使用，就要在@babel&#x2F;polyfill中添加core-js@2和core-js@3切换的选项，这样@babel&#x2F;polyfill中将包含core-js@2和core-js@3两个包，出于这个原因官方决定「弃用」@babel&#x2F;polyfill。关于@babel&#x2F;polyfill有三点要说明：</p>
+<ol>
+<li><p>如果采用@babel&#x2F;preset-env的polyfill方案是不需要@babel&#x2F;polyfill的安装为前提，只需要安装core-js（regenerator-runtime会在安装@babel&#x2F;preset-env的时候自动安装），然后通过设置useBuiltIns选项来开启对api的兼容性处理</p>
+</li>
+<li><p>你也可以不依赖@babel&#x2F;preset-env提供的处理api兼容性的能力，直接使用@babel&#x2F;polyfill来处理。如果使用了core-js@3，则需要做如下的替换工作:</p>
+</li>
+<li><p>普遍认为@babel&#x2F;polyfill除了有全局污染的缺点外，还会让不同的文件中包含重复的代码，增加编译后的体积</p>
+</li>
+</ol>
+<blockquote>
+<p>接第2条<br>&#x2F;&#x2F; before<br>import “@babel&#x2F;polyfill”;<br>&#x2F;&#x2F; after<br>import “core-js&#x2F;stable”;<br>import “regenerator-runtime&#x2F;runtime”;</p>
+</blockquote>
+<h3 id="babel-x2F-runtime"><a href="#babel-x2F-runtime" class="headerlink" title="@babel&#x2F;runtime"></a>@babel&#x2F;runtime</h3><p>在使用@babel&#x2F;preset-env提供的语法转换和全局api添加的功能时，难免会造成文件的体积增加以及api的全局污染。为了解决这类问题，引入了runtime的概念，runtime的「核心思想是以引入替换的方式来解决兼容性问题」。runtime包其实有三个：</p>
+<ul>
+<li>@babel&#x2F;runtime</li>
+<li>@babel&#x2F;runtime-corejs2</li>
+<li>@babel&#x2F;runtime-corejs3</li>
+</ul>
+<p>@babel&#x2F;runtime与@babel&#x2F;runtime-corejs2类似，区别只是@babel&#x2F;runtime-corejs2使用了core-js@2来处理全局api。<br>所以接下来只阐述@babel&#x2F;runtime-corejs2和@babel&#x2F;runtime-corejs3的区别。<br>@babel&#x2F;runtime-corejs2会从core-js中的library模块去加载对应的runtime代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtime-corejs2/core-js/array/from.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="built_in">require</span>(<span class="string">&quot;core-js/library/fn/array/from&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>@babel&#x2F;runtime-corejs3会从core-js-pure这个包中去加载对应的runtime代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtime-corejs3/core-js/array/from.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="built_in">require</span>(<span class="string">&quot;core-js-pure/features/array/from&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>@babel&#x2F;runtime-corejs3相比较@babel&#x2F;runtime-corejs2最大的改变就是「可以模拟实例上的api」。<br>比如数组的includes方法，@babel&#x2F;runtime-corejs3提供了模拟api，而@babel&#x2F;runtime-corejs2没有：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> _includesInstanceProperty <span class="keyword">from</span> <span class="string">&quot;@babel/runtime-corejs3/core-js-stable/instance/includes&quot;</span>;</span><br><span class="line"><span class="title function_">_includesInstanceProperty</span>(foo).<span class="title function_">call</span>(foo, <span class="string">&quot;a&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//在不支持Promise的环境下使用Promise</span></span><br><span class="line"><span class="keyword">var</span> _interopRequireDefault = <span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs3/helpers/interopRequireDefault&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> _promise = <span class="title function_">_interopRequireDefault</span>(<span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs3/core-js-stable/promise&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> _promise[<span class="string">&quot;default&quot;</span>](<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>ps: <strong>@babel&#x2F;runtime是api模拟方案的提供者，是项目生产依赖，而不是开发依赖，安装的时候不要使用-D</strong></p>
+<h3 id="babel-x2F-plugin-transform-runtime"><a href="#babel-x2F-plugin-transform-runtime" class="headerlink" title="@babel&#x2F;plugin-transform-runtime"></a>@babel&#x2F;plugin-transform-runtime</h3><p>@babel&#x2F;plugin-transform-runtime就是为了方便@babel&#x2F;runtime的使用。通过ast的分析，自动识别并替换代码中的新api，解决手动require的烦恼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;presets&quot;</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">&quot;@babel/preset-env&quot;</span></span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;plugins&quot;</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">&quot;@babel/plugin-transform-runtime&quot;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;corejs&quot;</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编译前</span></span><br><span class="line"><span class="keyword">const</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> key = <span class="string">&#x27;babel&#x27;</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  [key]: <span class="string">&#x27;polyfill&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @babel/runtime-corejs2编译</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> _interopRequireDefault = <span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs2/helpers/interopRequireDefault&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> _defineProperty2 = <span class="title function_">_interopRequireDefault</span>(<span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs2/helpers/defineProperty&quot;</span>));</span><br><span class="line"><span class="keyword">var</span> _promise = <span class="title function_">_interopRequireDefault</span>(<span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs2/core-js/promise&quot;</span>));</span><br><span class="line"><span class="keyword">var</span> result = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>].<span class="title function_">copyWithin</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> _promise[<span class="string">&quot;default&quot;</span>](<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> key = <span class="string">&#x27;babel&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = (<span class="number">0</span>, _defineProperty2[<span class="string">&quot;default&quot;</span>])(&#123;&#125;, key, <span class="string">&#x27;polyfill&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//@babel/runtime-corejs3编译</span></span><br><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> _interopRequireDefault = <span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs3/helpers/interopRequireDefault&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> _defineProperty2 = <span class="title function_">_interopRequireDefault</span>(<span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs3/helpers/defineProperty&quot;</span>));</span><br><span class="line"><span class="keyword">var</span> _copyWithin = <span class="title function_">_interopRequireDefault</span>(<span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs3/core-js-stable/instance/copy-within&quot;</span>));</span><br><span class="line"><span class="keyword">var</span> _promise = <span class="title function_">_interopRequireDefault</span>(<span class="built_in">require</span>(<span class="string">&quot;@babel/runtime-corejs3/core-js-stable/promise&quot;</span>));</span><br><span class="line"><span class="keyword">var</span> _context;</span><br><span class="line"><span class="keyword">var</span> result = (<span class="number">0</span>, _copyWithin[<span class="string">&quot;default&quot;</span>])(_context = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]).<span class="title function_">call</span>(_context, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> _promise[<span class="string">&quot;default&quot;</span>](<span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">123</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> key = <span class="string">&#x27;babel&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = (<span class="number">0</span>, _defineProperty2[<span class="string">&quot;default&quot;</span>])(&#123;&#125;, key, <span class="string">&#x27;polyfill&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用@babel&#x2F;runtime-corejs3可以模拟数组上的copyWithin方法，而@babel&#x2F;runtime-corejs2则不能</p>
+<p>@babel&#x2F;plugin-transform-runtime则是开发依赖，编译时负责处理@babel&#x2F;runtime，两者是搭配使用的</p>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>babel处理兼容性问题的解决方案：</p>
+<ol>
+<li>@babel&#x2F;preset-env + corejs@3实现语法转换 + 在全局和实例上添加api，支持全量加载和按需加载，我们简称polyfill方案(依赖核心包core-js)</li>
+<li>@babel&#x2F;preset-env + @babel&#x2F;runtime-corejs3 + @babel&#x2F;plugin-transform-runtime实现语法转换 + 模拟替换api，只支持按需加载，我们简称runtime方案(依赖核心包core-js-pure)</li>
+</ol>
+<p>优缺点：</p>
+<ol>
+<li>polyfill方案很明显的缺点就是会造成全局污染，而且会注入冗余的工具代码；优点是可以根据浏览器对新特性的支持度来选择性的进行兼容性处理，比较适合单独运行的业务项目</li>
+<li>runtime方案虽然解决了polyfill方案的那些缺点，但是不能根据浏览器对新特性的支持度来选择性的进行兼容性处理，也就是说只要在代码中识别到的api，并且该api也存在core-js-pure包中，就会自动替换，这样一来就会造成一些不必要的转换，从而增加代码体积，如果你是想开发一些供别人使用的第三方工具库，则建议你使用runtime方案来处理兼容性方案，以免影响使用者的运行环境</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/07/03/babel%E5%85%BC%E5%AE%B9%E6%96%B9%E6%A1%88/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-07-03T05:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-03</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2023/07/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">排序算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/03/git/" class="archive-article-date">
-  	<time datetime="2023-07-03T02:02:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/03/git/">git</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/03/Nginx%E6%8B%93%E5%B1%95/" class="archive-article-date">
-  	<time datetime="2023-07-03T01:23:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/03/Nginx%E6%8B%93%E5%B1%95/">Nginx拓展</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-05-04T14:24:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/">浏览器渲染原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" class="archive-article-date">
-  	<time datetime="2023-05-04T13:38:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器角度看待事件循环</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/28/Javascript-%E7%BB%A7%E6%89%BF/" class="archive-article-date">
-  	<time datetime="2023-04-28T07:56:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/28/Javascript-%E7%BB%A7%E6%89%BF/">Javascript 继承</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/17/TypeScript/" class="archive-article-date">
-  	<time datetime="2023-04-17T03:06:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/17/TypeScript/">TypeScript</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-04-07T09:31:28.320Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/">React脑图整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="archive-article-date">
-  	<time datetime="2023-03-22T08:43:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">详解Vue双向绑定</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2023-02-27T08:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">create-react-app 使用相关知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-02-13T01:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">知识点整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/06/React-Hooks/" class="archive-article-date">
-  	<time datetime="2023-02-06T03:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/06/React-Hooks/">React Hooks</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/02/hexo%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2023-02-02T11:30:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/02/hexo%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">hexo基础命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -563,8 +404,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
