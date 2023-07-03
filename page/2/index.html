@@ -149,6 +149,705 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-知识点整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">知识点整理</a>
+    </h1>
+  
+
+        
+        <a href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="archive-article-date">
+  	<time datetime="2023-02-13T01:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="Linux-top-硬链接-软链接"><a href="#Linux-top-硬链接-软链接" class="headerlink" title="Linux top 硬链接 软链接"></a>Linux top 硬链接 软链接</h5><p>top</p>
+<p>监视进程和Linux整体性能</p>
+<p>硬链接 vs 软链接</p>
+<p>链接：简单说，链接就是一种文件共享的方式，是POSIX中的概念，主流文件系统都支持链接文件。</p>
+<p>inode：在Linux文件系统中，保存在磁盘的上的文件不管是什么类型，都给他分配一个编号，称为索引节点号inode。</p>
+<p>Linux用ln命令创建软、硬链接。</p>
+<ul>
+<li>硬链接</li>
+</ul>
+<p>ln 源文件 硬链接文件</p>
+<ul>
+<li><p>具有相同iNode节点号的多个文件，互为硬链接文件</p>
+</li>
+<li><p>删除硬链接文件或者源文件任意之一，文件实体并未被删除，只有删除了所有硬链接文件和源文件，文件实体才被删除</p>
+</li>
+<li><p>硬链接文件只是文件的另一个入口</p>
+</li>
+<li><p>链接文件和源文件属性相同</p>
+</li>
+<li><p>不能跨分区，不能对目录使用</p>
+</li>
+<li><p>软链接</p>
+</li>
+</ul>
+<p>ln -s 源文件 软链接文件</p>
+<ul>
+<li>软链接相当于Windows的快捷方式</li>
+<li>软链接里面存放的是源文件的路径，指向源文件</li>
+<li>删除源文件，软链接文件依然存在，但是无法通过软链接访问源文件，已经失效，并且白字红底闪烁</li>
+<li>软链接和源文件是不通的文件，iNode号不同，文件类型也不同</li>
+<li>所有连接文件的权限都是777，而实际权限是由链接指向的源文件权限决定的</li>
+</ul>
+<h5 id="0x10"><a href="#0x10" class="headerlink" title="0x10"></a>0x10</h5><p>十六进制中的16的意思</p>
+<h5 id="网络分层"><a href="#网络分层" class="headerlink" title="网络分层"></a>网络分层</h5><p><img src="/statics/img/net.png" alt="网络分层"></p>
+<p> OSI七层模型</p>
+<ul>
+<li>物理层<ul>
+<li>主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输，到达目的地后再转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特</li>
+<li>主要协议：RJ45、IEEE802.2到IEEE802.11</li>
+</ul>
+</li>
+<li>数据链路层<ul>
+<li>定义了如何让格式化数据以帧为单位进行传输，以及如何让控制对物理介质的访问。这一层通常还提供错误检测和纠正，以确保数据的可靠传输。如：串口通信中使用到的115200、8、N、1</li>
+<li>主要协议：MAC（MAC：Multiple Access Control ）、PPP（点对点协议（Point to Point Protocol，PPP））</li>
+</ul>
+</li>
+<li>网络层<ul>
+<li>在位于不同地理位置的网络中的两个主机系统之间提供连接和路径选择。Internet的发展使得从世界各站点访问信息的用户数大大增加，而网络层正是管理这种连接的层</li>
+<li>主要协议：IP（网际互连协议）、ICMP（Internet控制报文协议）、ARP（地址解析协议）</li>
+</ul>
+</li>
+<li>传输层<ul>
+<li>定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。 主要是将从下层接收的数据进行分段和传输，到达目的地址后再进行重组。常常把这一层数据叫做段<br>-主要协议：TCP（传输控制协议）、UDP（用户数据报协议）</li>
+</ul>
+</li>
+<li>会话层<ul>
+<li>通过传输层(端口号：传输端口与接收端口)建立数据传输的通路。主要在你的系统之间发起会话或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）</li>
+<li>主要协议：RPC（远程调用协议 ）、NFS（网络文件传输协议）</li>
+</ul>
+</li>
+<li>表示层<ul>
+<li>可确保一个系统的应用层所发送的信息可以被另一个系统的应用层读取。例如，PC程序与另一台计算机进行通信，其中一台计算机使用扩展二一十进制交换码(EBCDIC)，而另一台则使用美国信息交换标准码（ASCII）来表示相同的字符。如有必要，表示层会通过使用一种通格式来实现多种数据格式之间的转换</li>
+<li>主要协议：MP4、JPEG</li>
+</ul>
+</li>
+<li>应用层<ul>
+<li>最靠近用户的OSI层。这一层为用户的应用程序（例如电子邮件、文件传输和终端仿真）提供网络服务</li>
+<li>主要协议：FTP、DNS、Telnet、HTTP、HTTPS</li>
+</ul>
+</li>
+</ul>
+<p> TCP&#x2F;IP四层模型</p>
+<p>TCP&#x2F;IP网络协议栈分为应用层（Application）【Telnet、FTP、e-mail】、传输层（Transport）【TCP、UDP】、网络层（Network）【IP、ICMP、IGMP】和链路层（Link）【驱动程序及接口卡】四层</p>
+<p>各层级之间作用</p>
+<p><img src="/statics/img/seven.png" alt="层级"></p>
+<h5 id="ES6装饰器"><a href="#ES6装饰器" class="headerlink" title="ES6装饰器"></a>ES6装饰器</h5><p>扩展类属性和类方法的工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 类</span><br><span class="line">class soldier &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 函数</span><br><span class="line"><span class="keyword">function</span> strong(target) &#123;</span><br><span class="line">    target.AK = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 装饰器</span><br><span class="line">@strong</span><br><span class="line">class soldier &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">soldier.AK // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>优点：代码可读性变强，且在不改变原有代码情况下，对原来功能进行扩展</p>
+<p>用法：</p>
+<ul>
+<li>类的装饰</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@decorator</span><br><span class="line">class A &#123;&#125;</span><br><span class="line">// 等同于</span><br><span class="line">class A &#123;&#125;</span><br><span class="line">A = decorator(A) || A;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 静态属性</span><br><span class="line">@testable</span><br><span class="line">class MyTestableClass &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> testable(target) &#123;</span><br><span class="line">    target.isTestable = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyTestableClass.isTestable // <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">// 动态参数</span><br><span class="line"><span class="keyword">function</span> testable(isTestable) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span>(target) &#123;</span><br><span class="line">        target.isTestable = isTestable;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@testable(<span class="literal">true</span>)</span><br><span class="line">class MyTestableClass &#123;&#125;</span><br><span class="line">MyTestableClass.isTestable // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类属性的装饰</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    target, 类的原型对象</span><br><span class="line">    name, 需要装饰的属性名</span><br><span class="line">    descriptor, 装饰属性名的描述对象</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> <span class="built_in">readonly</span>(target, name, descriptor) &#123;</span><br><span class="line">    descriptor.writable = <span class="literal">false</span>;</span><br><span class="line">    <span class="built_in">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Person &#123;</span><br><span class="line">    @<span class="built_in">readonly</span></span><br><span class="line">    <span class="function"><span class="title">name</span></span>() &#123; <span class="built_in">return</span> `<span class="variable">$&#123;this.first&#125;</span> <span class="variable">$&#123;this.last&#125;</span>`&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用场景</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// react-redux优化</span><br><span class="line">@connect(mapStateToProps, mapDispatchToProps)</span><br><span class="line"><span class="built_in">export</span> default class MyReactComponent extends React.Component &#123;&#125;</span><br><span class="line"></span><br><span class="line">// mixins</span><br><span class="line"><span class="keyword">function</span> minxins(...list) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span>(target) &#123;</span><br><span class="line">        Object.assign(target.prototype, ...list);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const Foo = &#123;</span><br><span class="line">    <span class="function"><span class="title">foo</span></span>() &#123; console.log(<span class="string">&#x27;foo&#x27;</span>)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@mixins(Foo)</span><br><span class="line">class MyClass &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> obj = new MyClass();</span><br><span class="line">obj.foo() // <span class="string">&#x27;foo&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="forEach循环能不能退出"><a href="#forEach循环能不能退出" class="headerlink" title="forEach循环能不能退出"></a>forEach循环能不能退出</h5><p>不能退出，但是可以通过try catch去终端，若循环体过大性能会随之下降</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [1,2,3,4,5];</span><br><span class="line"><span class="built_in">let</span> target = 3;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">for</span></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] === 1) &#123;</span><br><span class="line">        <span class="built_in">continue</span>; // 跳出单次循环</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arr[i]);</span><br><span class="line">    <span class="keyword">if</span>(arr[i] === target) <span class="built_in">break</span>; // 跳出循环 </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// forEach</span><br><span class="line">try &#123;</span><br><span class="line">    arr.forEach(e =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(e === 1) <span class="built_in">return</span>; //跳出单次循环</span><br><span class="line">        console.log(e)</span><br><span class="line">        <span class="keyword">if</span>(e === target) throw Error(); //跳出循环</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; catch(e) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="实现js继承的几种方式"><a href="#实现js继承的几种方式" class="headerlink" title="实现js继承的几种方式"></a>实现js继承的几种方式</h5><p>定义父类</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个动物类</span><br><span class="line"><span class="keyword">function</span> Animal (name) &#123;</span><br><span class="line">  // 属性</span><br><span class="line">  this.name = name || <span class="string">&#x27;Animal&#x27;</span>;</span><br><span class="line">  // 实例方法</span><br><span class="line">  this.sleep = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(this.name + <span class="string">&#x27;正在睡觉！&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 原型方法</span><br><span class="line">Animal.prototype.eat = <span class="keyword">function</span>(food) &#123;</span><br><span class="line">  console.log(this.name + <span class="string">&#x27;正在吃：&#x27;</span> + food);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>原型链继承 （将父类的实例作为子类的原型）<ul>
+<li>特点：<ul>
+<li>非常纯粹的继承关系，实例是子类的实例，也是父类的实例</li>
+<li>父类新增原型方法&#x2F;原型属性，子类都能访问到</li>
+<li>简单，易于实现</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中</li>
+<li>无法实现多继承</li>
+<li>来自原型对象的所有属性被所有实例共享</li>
+<li>创建子类实例时，无法向父类构造函数传参</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Cat</span></span>()&#123; </span><br><span class="line">&#125;</span><br><span class="line">Cat.prototype = new Animal();</span><br><span class="line">Cat.prototype.name = <span class="string">&#x27;cat&#x27;</span>;</span><br><span class="line"></span><br><span class="line">//　Test Code</span><br><span class="line">var <span class="built_in">cat</span> = new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.eat(<span class="string">&#x27;fish&#x27;</span>));</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Animal); //true </span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Cat); //true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>构造继承（使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型））<ul>
+<li>特点：<ul>
+<li>解决了原型链继承中子类实例共享父类引用属性的问题</li>
+<li>创建子类实例时，可以向父类传递参数</li>
+<li>可以实现多继承（call多个父类对象）</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>实例并不是父类的实例，只是子类的实例</li>
+<li>只能继承父类的实例属性和方法，不能继承原型属性&#x2F;方法</li>
+<li>无法实现函数复用，每个子类都有父类实例函数的副本，影响性能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Cat(name)&#123;</span><br><span class="line">  Animal.call(this);</span><br><span class="line">  this.name = name || <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Test Code</span><br><span class="line">var <span class="built_in">cat</span> = new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Animal); // <span class="literal">false</span></span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Cat); // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实例继承（为父类实例添加新特性，作为子类实例返回）<ul>
+<li>特点：<ul>
+<li>不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>实例是父类的实例，不是子类的实例</li>
+<li>不支持多继承</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Cat(name)&#123;</span><br><span class="line">  var instance = new Animal();</span><br><span class="line">  instance.name = name || <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line">  <span class="built_in">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Test Code</span><br><span class="line">var <span class="built_in">cat</span> = new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Animal); // <span class="literal">true</span></span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Cat); // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>拷贝继承<ul>
+<li>特点：<ul>
+<li>支持多继承</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>效率较低，内存占用高（因为要拷贝父类的属性）</li>
+<li>无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Cat(name)&#123;</span><br><span class="line">  var animal = new Animal();</span><br><span class="line">  <span class="keyword">for</span>(var p <span class="keyword">in</span> animal)&#123;</span><br><span class="line">    Cat.prototype[p] = animal[p];</span><br><span class="line">  &#125;</span><br><span class="line">  this.name = name || <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Test Code</span><br><span class="line">var <span class="built_in">cat</span> = new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Animal); // <span class="literal">false</span></span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Cat); // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组合继承（通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用）<ul>
+<li>特点：<ul>
+<li>弥补了构造继承的缺陷，可以继承实例属性&#x2F;方法，也可以继承原型属性&#x2F;方法</li>
+<li>既是子类的实例，也是父类的实例</li>
+<li>不存在引用属性共享问题</li>
+<li>可传参</li>
+<li>函数可复用</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）【多消耗一点内存】</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Cat(name)&#123;</span><br><span class="line">  Animal.call(this);</span><br><span class="line">  this.name = name || <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Cat.prototype = new Animal();</span><br><span class="line">s</span><br><span class="line">Cat.prototype.constructor = Cat;</span><br><span class="line"></span><br><span class="line">// Test Code</span><br><span class="line">var <span class="built_in">cat</span> = new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Animal); // <span class="literal">true</span></span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Cat); // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>寄生组合继承 （通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法&#x2F;属性，避免组合继承的缺点）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Cat(name)&#123;</span><br><span class="line">  Animal.call(this);</span><br><span class="line">  this.name = name || <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">  // 创建一个没有实例方法的类</span><br><span class="line">  var Super = <span class="function"><span class="title">function</span></span>()&#123;&#125;;</span><br><span class="line">  Super.prototype = Animal.prototype;</span><br><span class="line">  //将实例作为子类的原型</span><br><span class="line">  Cat.prototype = new Super();</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">// Test Code</span><br><span class="line">var <span class="built_in">cat</span> = new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Animal); // <span class="literal">true</span></span><br><span class="line">console.log(<span class="built_in">cat</span> instanceof Cat); //true</span><br><span class="line"></span><br><span class="line">Cat.prototype.constructor = Cat; // 需要修复下构造函数</span><br></pre></td></tr></table></figure>
+
+<h5 id="js的设计模式"><a href="#js的设计模式" class="headerlink" title="js的设计模式"></a>js的设计模式</h5><p>设计模式一共分为3大类23种</p>
+<table>
+<thead>
+<tr>
+<th>模式类似</th>
+<th>设计模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创建型模式</td>
+<td>单例模式、工厂模式、建造者模式</td>
+</tr>
+<tr>
+<td>结构型模式</td>
+<td>适配器模式、装饰器模式、代理模式</td>
+</tr>
+<tr>
+<td>行为型模式</td>
+<td>策略模式、观察者模式、发布订阅模式、职责链模式、中介者模式</td>
+</tr>
+</tbody></table>
+<ul>
+<li>单例模式（一个类只有一个实例，并提供一个访问他的全局访问点）<ul>
+<li>Singleton: 特定类，这是我们需要访问的类，访问者要拿到的是它的实例</li>
+<li>instance: 单例，是特定类的实例，特定类一般会提供 getInstance 方法来获取该单例</li>
+<li>getInstance: 获取单例的方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Singleton &#123;</span><br><span class="line">    <span class="built_in">let</span> _instance = null;</span><br><span class="line">    static <span class="function"><span class="title">getInstance</span></span>() &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Singleton._instance) &#123;</span><br><span class="line">            Singleton.instance = new Singleton()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 如果这个唯一的实例已经存在，则直接返回</span><br><span class="line">        <span class="built_in">return</span> Singleton._instance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const s1 = Singleton.getInstance()</span><br><span class="line">const s2 = Singleton.getInstance()</span><br><span class="line">console.log(s1 === s2) // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>工厂模式（根据不同的参数，返回不同类的实例）【将对象的创建与对象的实现分离。实现复杂，但使用简单。工厂会给我们提供一个工厂方法，我们直接去调用即可】<ul>
+<li>Visitor ：访问者，访问工厂方法</li>
+<li>Factory ：工厂，负责返回产品实例</li>
+<li>Product ：产品，访问者从工厂拿到的产品实例</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Restaurant &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.menuData = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取菜品</span><br><span class="line">    getDish(dish) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!this.menuData[menu]) &#123;</span><br><span class="line">            console.log(<span class="string">&#x27;菜品不存在，获取失败&#x27;</span>);</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> this.menuData[menu]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Dish &#123;</span><br><span class="line">    constructor(name, description) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">eat</span></span>() &#123;</span><br><span class="line">        console.log(`<span class="variable">$&#123;this.name&#125;</span>, <span class="variable">$&#123;this.description&#125;</span>`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>适配器模式（用于解决兼容问题，接口&#x2F;方法&#x2F;数据不兼容，将其转换成访问者期望的格式进行使用）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">// 整合不同数据格式的数据，使其符合统一格式</span><br><span class="line">// 定义一个统一的数据格式</span><br><span class="line">interface bookData &#123;</span><br><span class="line">    book_id: number;</span><br><span class="line">    status: number;</span><br><span class="line">    creatAt: string; // 时间戳</span><br><span class="line">    updateAt: string; // 时间戳</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 通过适配器模块转换</span><br><span class="line">interface bookDataType1 &#123;</span><br><span class="line">    book_id: number;</span><br><span class="line">    status: number;</span><br><span class="line">    creat: string;</span><br><span class="line">    update: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface bookDataType2 &#123;</span><br><span class="line">    <span class="built_in">id</span>: number;</span><br><span class="line">    status: number;</span><br><span class="line">    creatTime: number;</span><br><span class="line">    updateAt: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const getTimeStamp = <span class="keyword">function</span>(str: string): number &#123;</span><br><span class="line">    // ...转化成时间戳</span><br><span class="line">    <span class="built_in">return</span> timeStamp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 适配器</span><br><span class="line"><span class="built_in">export</span> const bookDataAdapter = &#123;</span><br><span class="line">    adapterType1(list: bookDataType1[]) &#123;</span><br><span class="line">        const bookDataList: bookData[] = list.map(item =&gt; &#123;</span><br><span class="line">            <span class="built_in">return</span> &#123;</span><br><span class="line">                book_id: item.book_id,</span><br><span class="line">                status: item.status,</span><br><span class="line">                createAt: getTimeStamp(item.create),</span><br><span class="line">                updateAt: getTimeStamp(item.update),</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">return</span> bookDataList;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    adapterType2(list: bookDataType2[]) &#123;</span><br><span class="line">        const bookDataList: bookData[] = list.map(item =&gt; &#123;</span><br><span class="line">            <span class="built_in">return</span> &#123;</span><br><span class="line">                book_id: item.id,</span><br><span class="line">                status: item.status,</span><br><span class="line">                createAt: item.createTime,</span><br><span class="line">                updateAt: getTimeStamp(item.updateAt),</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">return</span> bookDataList;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 整合数据</span><br><span class="line">const bookDataList = [</span><br><span class="line">    ...bookDataAdapter.adapterType1(type1MatailList),</span><br><span class="line">    ...bookDataAdapter.adapterType2(type2MatailList),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>装饰器模式（在不改变原对象的基础上，增加新属性&#x2F;方法&#x2F;功能）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const discountMap = &#123;</span><br><span class="line">    <span class="string">&#x27;discount200-20&#x27;</span>: <span class="keyword">function</span>(price) &#123;</span><br><span class="line">        <span class="built_in">return</span> price - Math.floor(price/200)*20;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;discount300-50&#x27;</span>: <span class="keyword">function</span>(price) &#123;</span><br><span class="line">        <span class="built_in">return</span> price-Math.floor(price/300)*50;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 算法使用</span><br><span class="line"><span class="keyword">function</span> priceCalculate(discountType, price) &#123;</span><br><span class="line">    <span class="built_in">return</span> discountMap[discountType] &amp;&amp; discountMap[discountType](price)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>观察者模式（一个对象（称为subject）维持一系列依赖于它的对象（称为observer），将有关状态的任何变更自动通知给它们（观察者）。）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 观察者模式，被观察者Subject,观察者Observer Subject变化，notify观察者</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> observerIds = 0;</span><br><span class="line">// 被观察者Subject</span><br><span class="line">class Subject &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.observers = [];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 添加观察者</span><br><span class="line">    addObserver(observer) &#123;</span><br><span class="line">        this.observers.push(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 移除观察者</span><br><span class="line">    removeObserver(observer) &#123;</span><br><span class="line">        this.observers = this.observers.filter(obs =&gt; &#123;</span><br><span class="line">            <span class="built_in">return</span> obs.id !== observer.id;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 通知notify观察者</span><br><span class="line">    <span class="function"><span class="title">notify</span></span>() &#123;</span><br><span class="line">        this.observers.forEach(observer =&gt; oberver.update(this));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 观察者Observer</span><br><span class="line">class Observer &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.id = observerIds++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    update(subject) &#123;</span><br><span class="line">        // 更新</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>发布订阅模式</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Event &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        this.eventEmitter = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 订阅</span><br><span class="line">    on(<span class="built_in">type</span>, fn) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!this.eventEmitter[<span class="built_in">type</span>]) &#123;</span><br><span class="line">            this.eventEmitter[<span class="built_in">type</span>] = [];</span><br><span class="line">        &#125;</span><br><span class="line">        this.eventEmitter[<span class="built_in">type</span>].push(fn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 取消订阅</span><br><span class="line">    off(<span class="built_in">type</span>, fn) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!this.eventEmitter[<span class="built_in">type</span>]) &#123;</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        this.eventEmitter[<span class="built_in">type</span>] = this.eventEmitter.filter(event =&gt; &#123;</span><br><span class="line">            <span class="built_in">return</span> event !== fn;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 发布</span><br><span class="line">    emit(<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!this.eventEmitter[<span class="built_in">type</span>]) &#123;</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        this.eventEmitter[<span class="built_in">type</span>].forEach(event =&gt; &#123;</span><br><span class="line">            event();</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="useEffect如何只在更新的时候执行"><a href="#useEffect如何只在更新的时候执行" class="headerlink" title="useEffect如何只在更新的时候执行"></a>useEffect如何只在更新的时候执行</h5><ul>
+<li>使用useState</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState, useEffect &#125; from <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="built_in">export</span> default () =&gt; &#123;</span><br><span class="line">    const [pageNum, setPageNum] = useState(1);</span><br><span class="line">    const [isInit, seyInit] = useState(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    const saveData = () =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">&#x27;useState---&#x27;</span>, pageNum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    useEffect(() =&gt; &#123;</span><br><span class="line">        if(isInit) &#123;</span><br><span class="line">            console.log(&#x27;初次渲染&#x27;)</span><br><span class="line">            setInit(false);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            saveData();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [pageNum]);</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button onClick=&#123;() =&gt; setPageNum(pageNum + <span class="number">1</span>)&#125;&gt;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用useRef</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState, useEffect &#125; from <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="built_in">export</span> default () =&gt; &#123;</span><br><span class="line">    const [pageNum, setPageNum] = useState(1);</span><br><span class="line">    const mounting = useRef(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    const saveData = () =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">&#x27;useState---&#x27;</span>, pageNum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    useEffect(() =&gt; &#123;</span><br><span class="line">        if(mounting.current) &#123;</span><br><span class="line">            console.log(&#x27;初次渲染&#x27;)</span><br><span class="line">            mounting.current = false;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            saveData();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [pageNum]);</span><br><span class="line"></span><br><span class="line">    return(</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;button onClick=&#123;() =&gt; setPageNum(pageNum + <span class="number">1</span>)&#125;&gt;&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="React-错误边界"><a href="#React-错误边界" class="headerlink" title="React 错误边界"></a>React 错误边界</h5><p>错误边界是一种React组件。它及其子组件形成一个树型结构，能捕获JavaScript中所有位置的错误，记录下错误，并且还能显示一个后备界面，避免让用户直接看到组件树的崩溃信息。</p>
+<p>无法捕获以下四种场景中产生的错误：</p>
+<ul>
+<li>事件处理函数（因为 Error Boundaries 实现的本质是触发更新，但是事件处理函数不在render或者commit阶段，所以无法进行捕获，如果你需要在事件处理器内部捕获错误，可以使用原生的 try &#x2F; catch 语句）</li>
+<li>异步代码（例如 setTimeout 或 requestAnimationFrame 回调函数）</li>
+<li>服务端渲染（因为触发更新只能在客户端进行，不能在serve端进行）</li>
+<li>它自身抛出来的错误（因为错误抛出要向父节点冒泡寻找 Error Boundaries 处理，无法处理自身产生的错误）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line">interface Props &#123;</span><br><span class="line">    children: any</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface State &#123;</span><br><span class="line">    error: any,</span><br><span class="line">    errorInfo: any,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ErrorBoundary extends React.Component&lt;Props, State&gt; &#123;</span><br><span class="line">    //初始化生命周期</span><br><span class="line">    constructor(props:Props)&#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state = &#123;error: null, errorInfo: null&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    //插获错误边界，在render时错误会执行</span><br><span class="line">    componentDidCatch(error: any, errorInfo: any) &#123;</span><br><span class="line">        this.setstate(&#123;</span><br><span class="line">            error: error,</span><br><span class="line">            errorInfo: errorInfo,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">render</span></span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> (this.state.errorInfo) &#123;</span><br><span class="line">            <span class="built_in">return</span> (</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    &lt;h2&gt;Something went wrong.&lt;/h2&gt;</span><br><span class="line">                    &lt;details style=&#123;&#123;whiteSpace: <span class="string">&quot;pre-wrap&quot;</span>&#125;&#125;&gt;</span><br><span class="line">                        &#123;this.state.error &amp;&amp; this.state.error.toString()&#125;</span><br><span class="line">                        &lt;br/&gt;</span><br><span class="line">                        &#123;this.state.errorInfo.componentStack&#125;</span><br><span class="line">                    &lt;/details&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> this.props.children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> default ErrorBoundary;</span><br></pre></td></tr></table></figure>
+
+<h5 id="React-Suspense"><a href="#React-Suspense" class="headerlink" title="React Suspense"></a>React Suspense</h5><p>等待目标代码加载，并且可以直接指定一个加载的界面（像是个 spinner），让它在用户等待的时候显示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const ProfilePage = React.lazy(() =&gt; import(&#x27;./ProfilePage&#x27;)); // 懒加载</span><br><span class="line"></span><br><span class="line">// 在 ProfilePage 组件处于加载阶段时显示一个 spinner</span><br><span class="line">&lt;Suspense fallback=&#123;&lt;Spinner /&gt;&#125;&gt;</span><br><span class="line">  &lt;ProfilePage /&gt;</span><br><span class="line">&lt;/Suspense&gt;</span><br></pre></td></tr></table></figure>
+
+<p>解决问题：</p>
+<ul>
+<li>代码分片</li>
+<li>异步获取数据</li>
+</ul>
+<h5 id="React-分片更新"><a href="#React-分片更新" class="headerlink" title="React 分片更新"></a>React 分片更新</h5><p>react 15中，更新过程是同步的一层组件套一层组件，逐渐深入的过程，在更新完所有组件之前不停止，调用的很深，并且很长时间不会返回。所以如果在更新的过程中，用户向表单元素中输入内容就会发生卡顿，导致性能问题</p>
+<p>React Fiber把每一个耗时长的任务分成很多小片，虽然总时间很长，但是每一个小片执行完之后，都会给其他任务一个执行的机会，这样唯一的线程就不会被独占，其他任务依然有运行的机会，维护每一个分片的数据结构，就是Fiber</p>
+<h5 id="redux-react-redux-redux-thunk-redux-saga"><a href="#redux-react-redux-redux-thunk-redux-saga" class="headerlink" title="redux react-redux redux thunk redux saga"></a>redux react-redux redux thunk redux saga</h5><p> redux工作流程</p>
+<p><img src="/statics/img/redux.png" alt="工作流程"></p>
+<ul>
+<li><p>actions<br>函数形式，返回 action 对象，通常具有type属性。负责指令的生成，页面通过 store.dispatch(action) 向 store 发送数据修改的请求。</p>
+</li>
+<li><p>reducers<br>一个纯函数，接收两个参数 (previousState, action) 第一个表示修改之前的 state 的值，action 是上一步页面通过 store.dispatch(action) 向 store 传递的 action。<br>reducers 通过 action 的 type 的值进行不同的处理，返回一个新的变量 newState。reducers不能直接修改传递进来的 previousState.</p>
+</li>
+<li><p>store<br>通过 const store &#x3D; createStore(reducer); 创建一个 store 对象。<br>需要导入到 React 组件文件中，通过 this.state &#x3D; store.getState(); 让组件获取 store 中的数据；</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 在componentDidMount生命周期函数中订阅store中数据的变化：</span><br><span class="line"><span class="function"><span class="title">componentDidMount</span></span>() &#123;</span><br><span class="line">    store.subscrible(() =&gt; &#123;</span><br><span class="line">        this.setState(store.getState());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 初始化store</span><br><span class="line">const store = createStore(reducers);</span><br><span class="line"></span><br><span class="line">// 获取state</span><br><span class="line">store.getState();</span><br><span class="line"></span><br><span class="line">// 触发action,请求修改数据</span><br><span class="line">store.dispatch(action);</span><br><span class="line"></span><br><span class="line">// 订阅数据变化的回调函数</span><br><span class="line">store.subscribe(() =&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p> react-redux</p>
+<p>react-redux 是将 react 和 redux 结合使用</p>
+<ul>
+<li>Provider组件， 可以简化我们每次导入到 React 组件文件 store 的工作</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Provider &#125; from <span class="string">&#x27;react-redux&#x27;</span>;</span><br><span class="line">&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;TodoList /&gt;</span><br><span class="line">&lt;/Provider&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mapStateToProps 函数，将 store 中的 state 转为组件的 props</li>
+<li>mapDispatchToProps 函数, 传入 dispatch 用于触发 action</li>
+<li>connect 函数</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">const mapStateToProps = state =&gt; (&#123;</span><br><span class="line">    inputValue: state.inputValue,</span><br><span class="line">    list: state.list</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = dispatch =&gt; (&#123;</span><br><span class="line">    add: () =&gt; &#123;</span><br><span class="line">        dispatch(addItem());</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    changeValue: (e) =&gt; &#123;</span><br><span class="line">        dispatch(change(e.target.value));</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    delete: (key) =&gt; &#123;</span><br><span class="line">        dispatch(deleteItem(key))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 接收mapStateToProps 和 mapDispatchToProps 两个参数</span><br><span class="line">// 返回一个函数，这个函数接受TodoList 返回一个封装的组件</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default connect(mapStateToProps, mapDispatchToProps)(TodoList)</span><br></pre></td></tr></table></figure>
+
+<p> redux-thunk (处理异步redux的中间件)</p>
+<p>同 redux 一起使用，增强了 redux 的功能。之前 actions 返回一个对象，异步的 action 可以返回一个函数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> const initList = list =&gt; (&#123;</span><br><span class="line">    <span class="built_in">type</span>: INIT_LIST,</span><br><span class="line">    list</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const getInitList = () =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span>(dispatch) &#123;</span><br><span class="line">        axios.get(<span class="string">&quot;/api/initList.json&quot;</span>).<span class="keyword">then</span>(res =&gt; &#123;</span><br><span class="line">            //调用上面的initList，向store发送数据修改的请求</span><br><span class="line">            //reducer通过action的<span class="built_in">type</span>的值进行处理，返回一个新的state</span><br><span class="line">            dispatch(initList(res.data))</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建store的时候也要加上redux-thunk中间件</span><br><span class="line">import &#123; createStore, applyMiddleware &#125; from <span class="string">&#x27;redux&#x27;</span>;</span><br><span class="line">import thunk from <span class="string">&#x27;redux-thunk&#x27;</span>;</span><br><span class="line">import reducer from <span class="string">&#x27;../reducers&#x27;</span>;</span><br><span class="line"></span><br><span class="line">const store = createStore(reducer, applyMiddleware(thunk));</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default store;</span><br></pre></td></tr></table></figure>
+
+<p> redux-saga</p>
+<p>redux-saga 也是 redux 的一个中间件，可以处理异步 action 。通过 takeEvery(GET_INIT_LIST, getInitList) 监听 action.type 是GET_INIT_LIST的action操作，会执行 getInitList 方法，去获取异步数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import React from <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line">import store from <span class="string">&#x27;../store&#x27;</span>;</span><br><span class="line">import &#123; getInitList &#125; from <span class="string">&#x27;../actions/actionCreator.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line">class TodoList extends React.Component &#123;</span><br><span class="line">    <span class="function"><span class="title">compontDisMount</span></span>() &#123;</span><br><span class="line">        const action = getInitList();</span><br><span class="line">        store.dispatch(action);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default TodoList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import&#123;takeEvery,put] from <span class="string">&#x27;redux-saga/effects&#x27;</span>;</span><br><span class="line">import &#123; GET_INIT_IST &#125; from <span class="string">&quot;.././common/actionTypes .js&quot;</span>; //业务代码</span><br><span class="line"></span><br><span class="line">import &#123; initList &#125; from <span class="string">&quot;../actions/actionCreator.js&quot;</span>;</span><br><span class="line">import axios from <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">getInitList</span></span>() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        const res = yield axios.get(<span class="string">&quot;/api/initList.json&quot;</span>);</span><br><span class="line">        const action = initList(res.data);</span><br><span class="line">        //yield put向store发送数据修改的请求，然后reducers通过action的<span class="built_in">type</span>的值进行处理，返回一个新的state</span><br><span class="line">        yield put(action);</span><br><span class="line">    &#125;catch(e)&#123;</span><br><span class="line">        console.log(<span class="string">&quot;initList.json网络请求失败&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">mySaga</span></span>()&#123;</span><br><span class="line">    yield takeEvery(GET_INIT_LIST, getInitList);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default mySaga;</span><br></pre></td></tr></table></figure>
+
+<p>同时，创建 store 的时候也要加上 redux-saga 这个中间件</p>
+<h5 id="webpack-hash-contenthash-chunkhash"><a href="#webpack-hash-contenthash-chunkhash" class="headerlink" title="webpack hash contenthash chunkhash"></a>webpack hash contenthash chunkhash</h5><p>对于浏览器来说，一方面期望每次请求页面资源时，获得的都是最新的资源；一方面期望在资源没有发生变化时，能够复用缓存对象。<br>这个时候，使用文件名+文件哈希值的方式，就可以实现只要通过文件名，就可以区分资源是否有更新</p>
+<ul>
+<li>hash：每次构建会生成一个hash。和整个项目有关，只要有项目文件更改，就会改变hash</li>
+<li>contenthash：和单个文件的内容相关。指定文件的内容发生改变，就会改变hash</li>
+<li>chunkhash：和webpack打包生成的chunk相关。每一个entry，都会有不同的hash</li>
+</ul>
+<p>chunkhash</p>
+<p>针对于输出文件，我们使用chunkhash。因为webpack打包后，最终每个entry文件及其依赖会生成单独的一个js文件。此时使用chunkhash，能够保证整个打包内容的更新准确性</p>
+<p>contenthash</p>
+<p>对于css文件来说，一般会使用MiniCssExtractPlugin将其抽取为一个单独的css文件。此时可以使用contenthash进行标记，确保css文件内容变化时，可以更新hash</p>
+<p>hash用法</p>
+<p>一般来说，没有什么机会直接使用hash。hash会更据每次工程的内容进行计算，很容易造成不必要的hash变更，不利于版本管理</p>
+<p>file-loader的hash</p>
+<p>file-loader的hash字段，这个loader自己定义的占位符，和webpack的内置hash字段并不一致<br>这里的hash是使用md4等hash算法，对文件内容进行hash<br>所以只要文件内容不变，hash还是会保持一致</p>
+<h5 id="webpack-sourceMap-选择"><a href="#webpack-sourceMap-选择" class="headerlink" title="webpack sourceMap 选择"></a>webpack sourceMap 选择</h5><p>sourcemap是为了解决开发代码与实际运行代码不一致时帮助我们debug到原始开发代码的技术。尤其是如今前端开发中大部分的代码都经过编译，打包等工程化转换。将工程代码和开发代码建立起一种映射关系，方便查找及定位bug调试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">devtool: <span class="string">&#x27;cheap-module-eval-source-map&#x27;</span>,</span><br><span class="line">// 一般开发环境配置</span><br><span class="line">// development devtool: <span class="string">&#x27;cheap-module-eval-source-map&#x27;</span>,</span><br><span class="line">// 一般情况生产环境配置</span><br><span class="line">// production devtool: <span class="string">&#x27;cheap-module-source-map&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>devtool：</p>
+<ul>
+<li>eval： 生成代码 每个模块都被eval执行，并且存在@sourceURL</li>
+<li>cheap-eval-source-map： 转换代码（行内） 每个模块被eval执行，并且sourcemap作为eval的一个dataurl</li>
+<li>cheap-module-eval-source-map： 原始代码（只有行内） 同样道理，但是更高的质量和更低的性能</li>
+<li>eval-source-map： 原始代码 同样道理，但是最高的质量和最低的性能</li>
+<li>cheap-source-map： 转换代码（行内） 生成的sourcemap没有列映射，从loaders生成的sourcemap没有被使用</li>
+<li>cheap-module-source-map： 原始代码（只有行内） 与上面一样除了每行特点的从loader中进行映射</li>
+<li>source-map： 原始代码 最好的sourcemap质量有完整的结果，但是会很慢</li>
+</ul>
+<p>5个关键字：</p>
+<ul>
+<li>eval： 使用eval包裹模块代码</li>
+<li>source-map： 产生.map文件</li>
+<li>cheap： 不包含列信息（关于列信息的解释下面会有详细介绍)也不包含loader的sourcemap</li>
+<li>module： 包含loader的sourcemap（比如jsx to js ，babel的sourcemap）</li>
+<li>inline： 将.map作为DataURI嵌入，不单独生成.map文件（这个配置项比较少见）</li>
+</ul>
+<h5 id="Node-Fork-spawn-exec"><a href="#Node-Fork-spawn-exec" class="headerlink" title="Node Fork spawn exec"></a>Node Fork spawn exec</h5><p>Node.js 是以单线程的模式运行的，但它使用的是事件驱动来处理并发，这样有助于我们在多核 cpu 的系统上创建多个子进程，从而提高性能。</p>
+<p>每个子进程总是带有三个流对象：child.stdin, child.stdout 和child.stderr。他们可能会共享父进程的 stdio 流，或者也可以是独立的被导流的流对象</p>
+<p>Node 提供了 child_process 模块来创建子进程，方法有</p>
+<ul>
+<li><p>exec - child_process.exec 使用子进程执行命令，缓存子进程的输出，并将子进程的输出以回调函数参数的形式一次性返回。exec方法会从子进程中返回一个完整的buffer。默认情况下，这个buffer的大小应该是200k。如果子进程返回的数据大小超过了200k，程序将会崩溃，同时显示错误信息“Error：maxBuffer exceeded”。你可以通过在exec的可选项中设置一个更大的buffer体积来解决这个问题，但是你不应该这样做，因为exec本来就不是用来返回很多数据的方法</p>
+</li>
+<li><p>spawn - child_process.spawn 使用指定的命令行参数创建新进程。spawn 会返回一个带有stdout和stderr流的对象。你可以通过stdout流来读取子进程返回给Node.js的数据。stdout拥有’data’,’end’以及一般流所具有的事件。当你想要子进程返回大量数据给Node时，比如说图像处理，读取二进制数据等等，你最好使用spawn方法</p>
+</li>
+<li><p>fork - child_process.fork 是 spawn()的特殊形式，用于在子进程中运行的模块，如 fork(‘.&#x2F;son.js’) 相当于 spawn(‘node’, [‘.&#x2F;son.js’]) 。与spawn方法不同的是，fork会在父进程与子进程之间，建立一个通信管道，用于进程之间的通信</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// <span class="built_in">exec</span></span><br><span class="line">require(<span class="string">&#x27;child_process&#x27;</span>).<span class="built_in">exec</span>(<span class="string">&#x27;dir&#x27;</span>, &#123;encoding: <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span> (err, stdout, stderr) &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        console.log(error.stack);</span><br><span class="line">        console.log(<span class="string">&#x27;error code: &#x27;</span> + error.code);</span><br><span class="line">        console.log(<span class="string">&#x27;Signal received:&#x27;</span> + error.signal);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    console.log(err, stdout, stderr);</span><br><span class="line">    console.log(<span class="string">&#x27;data: &#x27;</span> + stdout);</span><br><span class="line">&#125;&#125;).on(<span class="string">&#x27;exit&#x27;</span>, <span class="keyword">function</span>(code) &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;子进程已退出，退出码&#x27;</span> + code);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// spawn</span><br><span class="line">var child_process = require(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line">var spawnObj = child_process.spawn(<span class="string">&#x27;ping&#x27;</span>, [<span class="string">&#x27;127.0.0.1&#x27;</span>], &#123;encoding: <span class="string">&#x27;utf-8&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="Node-cluster"><a href="#Node-cluster" class="headerlink" title="Node cluster"></a>Node cluster</h5><p>用于创建多进程的Node应用</p>
+<p>基本使用方法就是cluster.fork()，这样就能直接创建一个新的进程。进程使用有完全独立的数据空间，堆栈等</p>
+<p>Cluster不仅仅是fork出一个进程而已，它还帮我们管理了子进程，有通信机制，还有负载均衡等等功能，这些功能要自己实现的话，需要花费大量的工作量。</p>
+<p>Cluster并不是fork的越多越好，Cluster是为了让Node利用起CPU的多核而设计的，所以Cluster fork的数量最好不要超过CPU的核数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> cluster = require(<span class="string">&#x27;cluster&#x27;</span>);</span><br><span class="line"><span class="built_in">let</span> http = require(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="built_in">let</span> numCPUs = require(<span class="string">&quot;os&quot;</span>).cpus().length;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    http.createServer(<span class="keyword">function</span>(req, res) &#123;</span><br><span class="line">        res.writeHead(200);</span><br><span class="line">        res.end(<span class="string">&#x27;process &#x27;</span> + process.pid + <span class="string">&#x27; says hello!&#x27;</span>);</span><br><span class="line">    &#125;).listen(8000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>total：Cluster能给Node带来性能上很大的提升，让Node以前让人诟病的单线程也得到解决了</p>
+<h5 id="CSS-DOM水平垂直居中的方法"><a href="#CSS-DOM水平垂直居中的方法" class="headerlink" title="CSS DOM水平垂直居中的方法"></a>CSS DOM水平垂直居中的方法</h5><ul>
+<li>固定高度实现水平垂直居中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;Hello World！&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// height + line-height + text-align</span><br><span class="line">// 缺点：固定高度，无法实现两行文本的垂直居中对齐</span><br><span class="line">.container &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 300px;</span><br><span class="line">    line-height: 300px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 绝对定位，配合margin负值使用，负值取值为对应的top和left值的一半再取负值。</span><br><span class="line">// 负margin使得子元素上margin边界和左margin边界纷纷向内缩，我们将这个负margin值分别设置为该元素的高度和宽度的一半，使得这两个边界都内缩到了该元素的中心点处，然后我们将top和left设置为50%，由于这两个属性的百分比值是相对于父元素的高度和宽度计算的，所以我们就将子元素中心点到父元素边界的距离设置为了父元素长宽的一半</span><br><span class="line">// 缺点：固定高度，高度无法自适应内容。元素脱离文档流。</span><br><span class="line">.container &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: calc(50% - 150px);</span><br><span class="line">    top: calc(50% - 150px);</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 300px;</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>高度自适应实现水平垂直居中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;Hello World！&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// transform translate</span><br><span class="line">// 优点：无需定高度。高度随内容自适应。</span><br><span class="line">// 缺点：元素脱离文档流。如果需要居中的元素已经在高度上超过了视口，那它的顶部会被视口裁切掉。</span><br><span class="line">.container &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 50%;</span><br><span class="line">    left: 50%;</span><br><span class="line">    transform: translate(-50%, -50%); // 自身宽度和高度的一半</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 利用vh实现</span><br><span class="line">.container &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    margin: 50vh auto 0;</span><br><span class="line">    transform: translateY(-50%);</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// flex实现</span><br><span class="line">.container &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">    height: 100vh;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 模拟表格布局实现</span><br><span class="line">// 此种方式，不需要固定高度。只需要给定任意高度或者不给高度，即可实现水平垂直居中效果。</span><br><span class="line">&lt;div class=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;inner&quot;</span>&gt;</span><br><span class="line">        hello world！</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">    display: table;         /* 让div以表格的形式渲染 */</span><br><span class="line">    width: 100%;</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.inner &#123;</span><br><span class="line">    display: table-cell;    /* 让子元素以表格的单元格形式渲染 */</span><br><span class="line">    text-align: center;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h5><ul>
+<li>容器属性</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">flex-direction 用于控制项目排列方向与顺序</span><br><span class="line">取值：row(默认，横向) | row-reverse(横向倒叙) | column(纵向) | column-reverse(纵向倒叙)</span><br><span class="line"></span><br><span class="line">flex-wrap 用于控制项目是否换行</span><br><span class="line">取值：nowrap(默认，不换行) | wrap(换行) | wrap-reverse(反向换行)</span><br><span class="line"></span><br><span class="line">flex-flow flex-deriction与flex-wrap属性的简写集合，默认属性为row nowrap</span><br><span class="line"></span><br><span class="line">justify-content 用于控制项目在横轴的对齐方式</span><br><span class="line">取值：flex-start(默认，左对齐) | flex-end(右对齐) | center(居中) | space-between(左右两端对齐) | space-around(两侧间距小于容器间距) | space-evenly(间距相等);</span><br><span class="line"></span><br><span class="line">align-items 用于控制项目在纵轴排列方式</span><br><span class="line">取值：flex-start(顶部) | flex-end(底部) | center(居中) | baseline(以第一行文字的基线排列) | stretch(默认，铺满)</span><br><span class="line"></span><br><span class="line">align-content 用于控制多行项目的对齐方式，如果项目只有一行则不会起作用</span><br><span class="line">取值：flex-start | flex-end | center | space-between | space-around | space-evenly | stretch(默认)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>项目属性</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">flex-order</span><br><span class="line">取值：默认0，用于决定项目排列顺序，数值越小，项目排列越靠前</span><br><span class="line"></span><br><span class="line">flex-grow</span><br><span class="line">取值：默认0，用于决定项目在有剩余空间的情况下是否放大，默认不放大；注意，即便设置了固定宽度，也会放大</span><br><span class="line"></span><br><span class="line">flex-shrink</span><br><span class="line">取值：默认1，用于决定项目在空间不足时是否缩小，默认项目都是1，即空间不足时大家一起等比缩小；注意，即便设置了固定宽度，也会缩小</span><br><span class="line"></span><br><span class="line">flex-basis</span><br><span class="line">取值：默认auto，用于设置项目宽度，默认auto时，项目会保持默认宽度，或者以width为自身的宽度，但如果设置了flex-basis，权重会width属性高，因此会覆盖widtn属性</span><br><span class="line"></span><br><span class="line">flex</span><br><span class="line">取值：默认0 1 auto，flex属性是flex-grow，flex-shrink与flex-basis三个属性的简写，用于定义项目放大，缩小与宽度。</span><br><span class="line"></span><br><span class="line">align-self</span><br><span class="line">取值：auto(默认) | flex-start | flex-end | center | baseline | stretch，表示继承父容器的align-items属性。如果没父元素，则默认stretch。</span><br><span class="line">用于让个别项目拥有与其它项目不同的对齐方式</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="高度塌陷"><a href="#高度塌陷" class="headerlink" title="高度塌陷"></a>高度塌陷</h5><p>在浮动布局中，父元素的高度默认是被子元素撑开的，当子元素浮动后，其会完全脱离文档流，子元素从文档流中脱离将会无法撑起父元素的高度，导致父元素的高度丢失<br>父元素高度丢失以后，其下的元素会自动上移，导致页面的布局混乱</p>
+<p>解决方案</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 给父盒子设置高度</span><br><span class="line">// 缺点是高度写死，窗口无法自适应</span><br><span class="line">height: *px;</span><br><span class="line"></span><br><span class="line">// 触发BFC清除浮动(父盒子添加overflow属性)</span><br><span class="line">overflow:auto; 有可能出现滚动条，影响美观</span><br><span class="line">overflow:hidden; 可能会带来内容不可见的问题。</span><br><span class="line"></span><br><span class="line">// 清除浮动</span><br><span class="line">&lt;div class=<span class="string">&quot;d1&quot;</span>&gt;父盒子</span><br><span class="line">    &lt;div class=<span class="string">&quot;d2&quot;</span>&gt;子盒子&lt;/div&gt;</span><br><span class="line">    &lt;br style=<span class="string">&quot;clear: both;&quot;</span>&gt;  &lt;!--清除浮动块--&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 用after伪元素清除浮动(推荐)</span><br><span class="line">// 在浮动元素父级的末尾添加一个空的元素来撑开父级元素的高度，使得浮动元素依然能包裹在父级盒子中，达到清除浮动的效果</span><br><span class="line">// &lt;!--content指你写的父元素--&gt;</span><br><span class="line">.content:after&#123;</span><br><span class="line">    content: <span class="string">&quot;&quot;</span>;  </span><br><span class="line">    display: block;</span><br><span class="line">    height: 0;</span><br><span class="line">    clear: both;</span><br><span class="line">    visibility: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="外边距重叠"><a href="#外边距重叠" class="headerlink" title="外边距重叠"></a>外边距重叠</h5><p>属于同一BFC的块级元素之间的外边距会出现这一情况,解决方案见下</p>
+<h5 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h5><p>BFC（Block Formatting Context）块格式化上下文</p>
+<p>使用方式</p>
+<ul>
+<li>浮动元素（元素的float不是 none，指定float为left或者right就可以创建BFC）</li>
+<li>绝对定位元素（元素的 position 为 absolute 或 fixed）</li>
+<li>display:inline-block，display:table-cell，display:flex，display:inline-flex</li>
+<li>overflow指定除了visible的值</li>
+</ul>
+<p>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line">&lt;div class=<span class="string">&quot;wrapper&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;div1&quot;</span>&gt;div1&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=<span class="string">&quot;div2&quot;</span>&gt;div2&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// css</span><br><span class="line">.wrapper &#123;</span><br><span class="line">    /* overflow: hidden; */</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.div1 &#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background-color: gray;</span><br><span class="line">    margin-bottom: 10px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.div2 &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    background-color: gold;</span><br><span class="line">    margin-top: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="盒模型-标准-x2F-怪异盒模型区别"><a href="#盒模型-标准-x2F-怪异盒模型区别" class="headerlink" title="盒模型 标准&#x2F;怪异盒模型区别"></a>盒模型 标准&#x2F;怪异盒模型区别</h5><p>CSS 盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容</p>
+<p>盒子组成：Content box（内容）、Padding box（内边距）、Border box（边框）、Margin box（外边距）</p>
+<p>标准盒模型</p>
+<ul>
+<li>设置的 width 与 height 只包括内容（content box）的宽和高， 不包括边框（border），内边距（padding），外边距（margin）</li>
+</ul>
+<p>怪异盒模型</p>
+<ul>
+<li>设置的 width 与 height 包括内容（content box）的宽和高，边框（border），内边距（padding），但不包括外边距（margin）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line">&lt;div class=<span class="string">&quot;content_box&quot;</span>&gt;标准盒模型1&lt;/div&gt;</span><br><span class="line">&lt;div class=<span class="string">&quot;content_box1&quot;</span>&gt;标准盒模型2&lt;/div&gt;</span><br><span class="line">&lt;div style=<span class="string">&quot;overflow: hidden;&quot;</span>&gt;</span><br><span class="line">    &lt;span class=<span class="string">&quot;inline_box&quot;</span>&gt;内联盒子1&lt;/span&gt;</span><br><span class="line">    &lt;span class=<span class="string">&quot;inline_box1&quot;</span>&gt;内联盒子2&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// css</span><br><span class="line">/* block */</span><br><span class="line">/**</span><br><span class="line">    盒子会在内联的方向上扩展并占据父容器在该方向上的所有可用空间，在绝大数情况下意味着盒子会和父容器一样宽</span><br><span class="line">    每个盒子都会换行</span><br><span class="line">    width 和 height 属性可以发挥作用</span><br><span class="line">    内边距（padding）, 外边距（margin） 和 边框（border） 会将其他元素从当前盒子周围推开</span><br><span class="line">*/</span><br><span class="line">.content_box, .content_box1 &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 150px;</span><br><span class="line">    background-color: wheat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.content_box &#123;</span><br><span class="line">    margin: 20px;</span><br><span class="line">    padding: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.content_box1 &#123;</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">    padding: 20px;</span><br><span class="line">    margin: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* inline */</span><br><span class="line">/* </span><br><span class="line">    盒子不会产生换行</span><br><span class="line">    width 和 height 属性将不起作用</span><br><span class="line">    垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 inline 状态的盒子推开</span><br><span class="line">    水平方向的内边距、外边距以及边框会被应用且会把其他处于 inline 状态的盒子推开 </span><br><span class="line">*/</span><br><span class="line">.inline_box, .inline_box1 &#123;</span><br><span class="line">    /* width: 100px;</span><br><span class="line">    height: 40px; */ </span><br><span class="line">    padding: 20px 20px;</span><br><span class="line">    background-color: violet;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="vh-vw-含义"><a href="#vh-vw-含义" class="headerlink" title="vh vw 含义"></a>vh vw 含义</h5><p>相对的是视口（非body标签定义的宽度）的相对单位</p>
+<ul>
+<li>vw： viewport width 意思是视口的宽度(1vw &#x3D; 1&#x2F;100 * 视口宽度)</li>
+<li>vh： viewport height 意思是视口的高度(1vh &#x3D;1&#x2F;100 * 视口高度)</li>
+</ul>
+<h5 id="inline-block-特点"><a href="#inline-block-特点" class="headerlink" title="inline-block 特点"></a>inline-block 特点</h5><ul>
+<li>一个行可以设置多个元素显示，可以控制宽高</li>
+<li>和相邻的行内元素在一行上，但它们之间会有空白间隙，一行显示多个</li>
+<li>默认宽度就是他们本身内容的宽度</li>
+<li>高度，行高，外边距以及内边距都可以控制</li>
+</ul>
+<h5 id="var-let-const-区别"><a href="#var-let-const-区别" class="headerlink" title="var let const 区别"></a>var let const 区别</h5><p>let &#x2F; const 为ES6新增关键字</p>
+<ul>
+<li>let和var用来声明变量，const用来声明常量（const声明引用类型是可以改变的）</li>
+<li>var是函数作用域，let和const是块级作用域（{}）</li>
+<li>var有变量提升的功能，let和const没有</li>
+<li>在全局作用域，用var声明的变量，会作为window的一个属性。而用let和const声明的变量或常量，并不会作为window的属性</li>
+</ul>
+<p>备注：const一旦被定义必须要求赋值，且定义引用类型数据时，可以改动</p>
+<h5 id="箭头函数特点"><a href="#箭头函数特点" class="headerlink" title="箭头函数特点"></a>箭头函数特点</h5><ul>
+<li>语法简洁</li>
+<li>不绑定this，会捕获其所在上下文的this，作为自己的this</li>
+<li>匿名函数，不能作为构造函数，不可以使用new命令，否则后抛出错误</li>
+<li>不绑定arguments，取而代之用rest参数解决，同时没有super和new.target</li>
+<li>call,apply,bind并不会改变箭头函数中的this指向</li>
+<li>没有原型对象prototype这个属性</li>
+<li>不能使用yield关键字，不能用作Generator函数</li>
+</ul>
+<h5 id="Map-Set-数据结构"><a href="#Map-Set-数据结构" class="headerlink" title="Map Set 数据结构"></a>Map Set 数据结构</h5><p>Set &#x3D;&gt;</p>
+<p>1、类似于数组，但是成员的值都是唯一的，没有重复的值<br>2、本身是一个构造函数，用来生成 Set 数据结构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 声明方式</span><br><span class="line"><span class="built_in">let</span> s = new Set();</span><br><span class="line">console.log(s);</span><br><span class="line"></span><br><span class="line">// 唯一的</span><br><span class="line"><span class="built_in">let</span> s = new Set([1,3,4,5,3]);</span><br><span class="line"></span><br><span class="line">// 添加新值</span><br><span class="line">s.add(<span class="string">&#x27;kaka&#x27;</span>).add(Dorothy) // 支持链式操作</span><br><span class="line"></span><br><span class="line">s.delete(2) //删除2</span><br><span class="line">s.clear() // 清空</span><br><span class="line">s.has(<span class="string">&#x27;kaka&#x27;</span>) // boolean值，判断是否包含某个值</span><br><span class="line">s.size // 输出Set的长度</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3、遍历的四种方式</p>
+<ul>
+<li>keys(): 返回键名的遍历器</li>
+<li>values(): 返回键值的遍历器</li>
+<li>entries(): 返回键值对的遍历器</li>
+<li>forEach(): 使用回调函数遍历每个成员</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Set相当于也有key：value，只不过它的key和value是相同的</span><br><span class="line"></span><br><span class="line">s.forEach(item =&gt; console.log(item))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> item of s) &#123;</span><br><span class="line">    console.log(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> item of s.keys()) &#123;</span><br><span class="line">    console.log(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> item of s.values()) &#123;</span><br><span class="line">    console.log(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> item of s.entries()) &#123;</span><br><span class="line">    console.log(item[0], item[1])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、应用场景</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 去重</span><br><span class="line"><span class="built_in">let</span> s = new Set([1,3,4,2,3])</span><br><span class="line"></span><br><span class="line">// 合并去重</span><br><span class="line"><span class="built_in">let</span> arr1 = [1,2,3,4,5]</span><br><span class="line"><span class="built_in">let</span> arr2 = [2,4,5,6,7];</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> s1 = new Set([...arr1, ...arr2]);</span><br><span class="line">console.log(s1) // &#123;1,2,3,4,5,6,7&#125;</span><br><span class="line"></span><br><span class="line">// 交集</span><br><span class="line"><span class="built_in">let</span> s1 = new Set(arr1);</span><br><span class="line"><span class="built_in">let</span> s2 = new Set(arr2);</span><br><span class="line"><span class="built_in">let</span> result = new Set(arr1.filter(item =&gt; s2.has(item)));</span><br><span class="line">console.log(result) // Set(3) &#123;2, 4, 5&#125;</span><br><span class="line"></span><br><span class="line">// 差集</span><br><span class="line"><span class="built_in">let</span> arr3 = new Set(arr1.filter(item =&gt; !s2.has(item)));</span><br><span class="line"><span class="built_in">let</span> arr4 = new Set(arr2.filter(item =&gt; !s1.has(item)));</span><br><span class="line">console.log(arr3); // Set(2) &#123;1, 3&#125;</span><br><span class="line">console.log(arr4); // Set(2) &#123;6, 7&#125;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">set</span> =&gt; Array</span><br><span class="line">console.log([...arr3, ...arr4]) // [1, 3, 6, 7]</span><br><span class="line">console.log(Array.from(result)) // [2, 4, 5]</span><br></pre></td></tr></table></figure>
+
+<p>5、WeakSet</p>
+<ul>
+<li>WeakSet只能够存储对象</li>
+<li>数字、字符串等原始数据对象不能够放进去</li>
+<li>不能够遍历</li>
+<li>垃圾回收机制：GC +1 +1，只要GC后面的值不为0，则不会被回收，所以可能会有内存泄漏的风险。<br><font color="#f5222d">WeakSet 的对象是弱引用，它不会被计入垃圾回收机制</font>，所以不管它是否还有引用，当前使用完之后便回收了，可用于<font color="#f5222d">临时存放对象</font></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> ws = new WeakSet();</span><br><span class="line">// ws.add(21) // error</span><br><span class="line">// ws.add(<span class="string">&#x27;2a&#x27;</span>) // error</span><br><span class="line">const obj1 = &#123;</span><br><span class="line">    name: <span class="string">&#x27;kaka&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">const obj2 = &#123;</span><br><span class="line">    age: 4</span><br><span class="line">&#125;</span><br><span class="line">ws.add(obj1).add(obj2).delete(obj1) // 新增 &amp; 删除</span><br><span class="line">console.log(ws)</span><br><span class="line">console.log(ws.has(obj1))</span><br><span class="line"></span><br><span class="line">// ws.forEach(item =&gt; console.log(item)) // error</span><br><span class="line">// console.log([...ws]) // error</span><br><span class="line">console.log(Array.from(ws)) // []</span><br></pre></td></tr></table></figure>
+
+<p>Map &#x3D;&gt;</p>
+<p>1、类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以 当作键</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> m = new Map();</span><br><span class="line"><span class="built_in">let</span> obj = &#123;</span><br><span class="line">    name: <span class="string">&#x27;beibei&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">m.set(obj, <span class="string">&#x27;sr&#x27;</span>).<span class="built_in">set</span>(2, <span class="string">&#x27;aaa&#x27;</span>); // <span class="built_in">set</span>添加新值</span><br><span class="line">console.log(m.get(obj)) // get获取值  <span class="string">&#x27;sr&#x27;</span></span><br><span class="line">console.log(m)</span><br><span class="line">// m.delete(obj) // 删除值</span><br><span class="line">console.log(m.has(obj))</span><br><span class="line"></span><br><span class="line">// 将数组作为参数</span><br><span class="line"><span class="built_in">let</span> map = new Map([</span><br><span class="line">    [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;cao&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;age&#x27;</span>, 2]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">console.log(map.size)</span><br><span class="line"></span><br><span class="line">console.log(map.has(<span class="string">&#x27;name&#x27;</span>)) // <span class="literal">true</span></span><br><span class="line">console.log(map.get(<span class="string">&#x27;age&#x27;</span>)) // 2</span><br><span class="line">map.set(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xiao&#x27;</span>) // <span class="string">&quot;name&quot;</span> =&gt; <span class="string">&#x27;xiao&#x27;</span></span><br><span class="line">// map.delete(<span class="string">&#x27;name&#x27;</span>) // 删除</span><br><span class="line">// map.clear() // 清空</span><br><span class="line"></span><br><span class="line">console.log(map);</span><br></pre></td></tr></table></figure>
+
+<p>2、遍历方式</p>
+<ul>
+<li>keys(): 返回键名的遍历器</li>
+<li>values(): 返回键值的遍历器</li>
+<li>entries(): 返回键值对的遍历器</li>
+<li>forEach(): 使用回调函数遍历每个成员，遍历时参数[value, key]（值在前键在后）（Map的key和value不同，Set相同）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 遍历</span><br><span class="line">map.forEach((value, key) =&gt; console.log(value, key))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> [key, value] of map) &#123;</span><br><span class="line">    console.log(key, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> key of map.keys()) &#123;</span><br><span class="line">    console.log(key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> value of map.values()) &#123;</span><br><span class="line">    console.log(value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> [key, value] of map.entries()) &#123;</span><br><span class="line">    console.log(key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、应用场景 &amp; 比较</p>
+<p>使用Object场景都可考虑使用Map</p>
+<ul>
+<li>Map判断是否包含某个属性时可直接调用.has(), Object需要循环遍历才能够判断</li>
+<li>Map的key更多样</li>
+<li>Map可直接通过.size()来获取键值对的个数，而Object仍需要循环</li>
+<li>Object含有自己的原型，原型链上的名字与自己定义的键名可能会冲突</li>
+</ul>
+<p>4、WeakMap</p>
+<p>WeakMap与Map的结构相似，不同点在于：WeakMap的键名（key）仅支持引用数据类型（对象、数组、函数），且WeakMap不支持遍历，也是一种弱引用，不会被计入垃圾回收机制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 应用场景</span><br><span class="line"><span class="built_in">let</span> wm = new WeakMap();</span><br><span class="line">// wm.set(1, <span class="string">&#x27;aaa&#x27;</span>); // error</span><br><span class="line">wm.set([1], 2).<span class="built_in">set</span>(&#123;name: <span class="string">&#x27;kaka&#x27;</span>&#125;, <span class="string">&#x27;es&#x27;</span>)</span><br><span class="line">console.log(wm)</span><br><span class="line"></span><br><span class="line">// wm.clear(); // error,不支持</span><br><span class="line">// console.log(wm.size) // undefined, 不支持</span><br><span class="line"><span class="built_in">let</span> wa = new WeakMap()</span><br><span class="line"><span class="built_in">let</span> elem = document.getElementsByTagName(<span class="string">&#x27;h3&#x27;</span>)</span><br><span class="line">console.log(elem, <span class="string">&#x27;elem&#x27;</span>)</span><br><span class="line">wa.set(elem, <span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">console.log(wa.get(elem), <span class="string">&#x27;dd&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="Vue-template-编译成什么"><a href="#Vue-template-编译成什么" class="headerlink" title="Vue template 编译成什么"></a>Vue template 编译成什么</h5><p>调用compile()方法，包括3个步骤，<br>parse()生成ast(抽象语法树)、optimize对静态节点优化、generate()生成render字符串</p>
+<p>parse() &#x3D;&gt; <font color="#f5222d">其实就是不断的截取字符串并解析它们的过程</font>，在此过程中，如果截取到非闭合标签就push到stack中，如果截取到结束标签就把这个标签pop出来</p>
+<p>optimize() &#x3D;&gt; 标记不需要变化的静态内容（与数据没有关系，不需要每次都更新的内容），作用是为了之后dom diff时，是否需要patch，diff算法会直接跳过静态节点，从而减少了比较的过程，优化了patch的性能</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> i = 0; l = node.children.length; i &lt; l; i++) &#123;</span><br><span class="line">    const child = node.children[i]</span><br><span class="line">    markStatic(child)</span><br><span class="line">    <span class="keyword">if</span>(!child.static) &#123;</span><br><span class="line">        node.static = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>generate() &#x3D;&gt; 将AST转化成render funtion字符串的过程，他递归了AST，得到结果是render的字符串</p>
+<p>自我感觉，和react 虚拟DOM树类似[通过generate生成render函数，形成虚拟DOM]</p>
+<p>编译过程：</p>
+<ul>
+<li>vue template模板编译的过程经过parse()生成ast(抽象语法树),optimize对静态节点优化，generate()生成render字符串</li>
+<li>之后调用new Watcher()函数，用来监听数据的变化，render 函数就是数据监听的回调所调用的，其结果便是重新生成 vnode</li>
+<li>当这个 render 函数字符串在第一次 mount、或者绑定的数据更新的时候，都会被调用，生成 Vnode。</li>
+<li>如果是数据的更新，那么 Vnode 会与数据改变之前的 Vnode 做 diff，对内容做改动之后，就会更新到 我们真正的 DOM</li>
+</ul>
+<h5 id="For-in-和-For-of-区别"><a href="#For-in-和-For-of-区别" class="headerlink" title="For in 和 For of 区别"></a>For in 和 For of 区别</h5><ul>
+<li>循环数组</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const arr = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, 4];</span><br><span class="line"></span><br><span class="line">// <span class="keyword">for</span> ... <span class="keyword">in</span> 输出数组的index下标</span><br><span class="line"><span class="keyword">for</span>(const key <span class="keyword">in</span> arr) &#123;</span><br><span class="line">    console.log(key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">for</span> ... of 输出的是数组每一项的值</span><br><span class="line"><span class="keyword">for</span>(const key of arr) &#123;</span><br><span class="line">    console.log(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>循环对象</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const object = &#123; name: <span class="string">&#x27;lx&#x27;</span>, age: 23 &#125;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">for</span> <span class="keyword">in</span> 可以遍历对象</span><br><span class="line"><span class="keyword">for</span>(const key <span class="keyword">in</span> object) &#123;</span><br><span class="line">    console.log(key);</span><br><span class="line">    console.log(object[key])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">for</span> of 不能遍历对象，只能遍历带有iterator接口的，例如Set,Map,String,Array</span><br><span class="line"><span class="keyword">for</span>(const key of object) &#123;</span><br><span class="line">    console.log(key) // error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数组对象</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const List = [&#123;name: <span class="string">&#x27;lx&#x27;</span>&#125;, &#123;age: 23&#125;]</span><br><span class="line"><span class="keyword">for</span>(const val of List) &#123;</span><br><span class="line">    console.log(val) // &#123;name: <span class="string">&#x27;lx&#x27;</span>&#125;, &#123;age: 23&#125;</span><br><span class="line">    <span class="keyword">for</span>(const key <span class="keyword">in</span> val) &#123;</span><br><span class="line">        console.log(val[key]) // 输出lx,23</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ps: for in适合遍历对象，for of适合遍历数组。for in遍历的是数组的索引，对象的属性，以及原型链上的属性。</p>
+<h5 id="js中对堆和栈的理解"><a href="#js中对堆和栈的理解" class="headerlink" title="js中对堆和栈的理解"></a>js中对堆和栈的理解</h5><ul>
+<li>栈(stack)</li>
+</ul>
+<blockquote>
+<p>栈是有结构的，存储的时候按顺序存储，先存进去的在栈的最下面，遵循’先进后出‘的原则，栈中存放的是基本数据类型变量的值，以及引用数据类型中指向堆的引用（地址），占据的空间大小一般是确定的。可以简单理解为手机的运行内存，栈的存取速度比堆要快</p>
+</blockquote>
+<ul>
+<li>堆(heap)</li>
+</ul>
+<blockquote>
+<p>堆中数据的存放是没有结构的，存放的是引用数据类型，堆中存放的数据可以被反复利用，堆的存取速度比较慢，堆内存中存储的数据不会随着方法的结束而销毁，即方法结束后存储的数据还能被另一个引用变量所引用。</p>
+</blockquote>
+<p>ps: 所有方法中定义的内存都存储在栈中，随着方法的执行结束，与其对应的内存栈也会自动释放</p>
+<h5 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h5><p>事件流 &#x3D;&gt; 事件冒泡(IE)</p>
+<blockquote>
+<p>事件开始时由最具体的元素（深）接收，逐级向上传播到较为不具体的节点（文档）</p>
+</blockquote>
+<p>事件流 &#x3D;&gt; 事件捕获(NC)</p>
+<blockquote>
+<p>事件开始时由不太具体的节点先接收到事件（文档），逐级向下传播到最具体的节点（深）</p>
+</blockquote>
+<h5 id="回流-x2F-重绘"><a href="#回流-x2F-重绘" class="headerlink" title="回流&#x2F;重绘"></a>回流&#x2F;重绘</h5><ul>
+<li>回流（重排）：布局引擎会根据各种样式计算每个盒子在页面上的大小与位置</li>
+<li>重绘：当计算好盒模型的位置、大小及其他属性后，浏览器根据每个盒子特性进行绘制</li>
+</ul>
+<p>浏览器渲染解析机制：</p>
+<ul>
+<li>解析HTML，生成DOM树，解析CSS，生成CSSOM树</li>
+<li>将DOM树和CSSOM树结合，生成渲染树(Render Tree)</li>
+<li>Layout(回流):根据生成的渲染树，进行回流(Layout)，得到节点的几何信息（位置，大小）</li>
+<li>Painting(重绘):根据渲染树以及回流得到的几何信息，得到节点的绝对像素</li>
+<li>Display:将像素发送给GPU，展示在页面上</li>
+</ul>
+<p>触发场景</p>
+<ul>
+<li><p>回流触发时机(主要是计算节点的位置和几何信息，那么当页面布局和几何信息发生变化的时候，就需要回流)</p>
+<ul>
+<li>添加或删除可见的DOM元素</li>
+<li>元素的位置发生变化</li>
+<li>元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等）</li>
+<li>内容发生变化，比如文本变化或图片被另一个不同尺寸的图片所替代</li>
+<li>页面一开始渲染的时候（这避免不了）</li>
+<li>浏览器的窗口尺寸变化（因为回流是根据视口的大小来计算元素的位置和大小的）</li>
+<li>获取特定属性的值，如通过即时计算得到的属性（offsetTop、offsetLeft、 offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、clientTop、clientLeft、clientWidth、clientHeight等）</li>
+</ul>
+</li>
+<li><p>重绘触发时机</p>
+<ul>
+<li>触发回流一定会触发重绘</li>
+<li>其他行为触发（颜色修改，文本方向修改，阴影修改）</li>
+</ul>
+</li>
+<li><p>浏览器优化机制<br>大多数浏览器都会通过队列化修改并批量执行来优化重排过程。浏览器会将修改操作放入到队列里，直到过了一段时间或者操作达到了一个阈值，才清空队列</p>
+</li>
+<li><p>减少触发回流&#x2F;重绘</p>
+<ul>
+<li>设定元素的样式，通过改变元素的 class 类名 (尽可能在 DOM 树的最里层)</li>
+<li>避免设置多项内联样式</li>
+<li>应用元素的动画，使用 position 属性的 fixed 值或 absolute 值(如前文示例所提)</li>
+<li>避免使用 table 布局，table 中每个元素的大小以及内容的改动，都会导致整个 table 的重新计算</li>
+<li>对于那些复杂的动画，对其设置 position: fixed&#x2F;absolute，尽可能地使元素脱离文档流，从而减少对其他元素的影响</li>
+<li>使用css3硬件加速，可以让transform、opacity、filters这些动画不会引起回流重绘</li>
+<li>避免使用 CSS 的 JavaScript 表达式</li>
+</ul>
+</li>
+</ul>
+<h5 id="节流-x2F-防抖"><a href="#节流-x2F-防抖" class="headerlink" title="节流&#x2F;防抖"></a>节流&#x2F;防抖</h5><p>相同点：防抖和节流都是为了阻止操作高频触发，从而浪费性能。</p>
+<p>区别：</p>
+<ul>
+<li>防抖：触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</li>
+<li>节流：高频事件触发，但在n秒内只会执行一次，节流会稀释函数的执行频率</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>防抖<ul>
+<li>search搜索联想，用户在不断输入值时，用防抖来节约请求资源</li>
+<li>window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次</li>
+</ul>
+</li>
+<li>节流<ul>
+<li>鼠标不断点击触发，mousedown(单位时间内只触发一次)</li>
+<li>监听滚动事件，比如是否滑到底部自动加载更多</li>
+</ul>
+</li>
+</ul>
+<p>设计思路</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//防抖：事件触发后开启一个定时器，如果事件在这个定时器限定的时间内再次触发，则清除定时器，在写一个定时器，定时时间到则触发</span><br><span class="line">// 弊端：事件会一直等到用户完成操作后一段时间在操作，如果一直操作，会一直不触发</span><br><span class="line"><span class="keyword">function</span> debounce(fn, delay) &#123;</span><br><span class="line">    <span class="built_in">let</span> timer = null;</span><br><span class="line">    <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">        timer = setTimeout(() =&gt; &#123;</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 节流：事件触发时让函数执行一次，然后关闭这个阀门，过了一段时间后再将这个阀门打开，再次触发事件</span><br><span class="line">function throttle(fn, delay) &#123;</span><br><span class="line">    let valid = true;</span><br><span class="line">    return function() &#123;</span><br><span class="line">        if(valid) &#123;</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                fn.apply(this, arguments);</span><br><span class="line">                valid = true;</span><br><span class="line">            &#125;, delay)</span><br><span class="line">            valid = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="Vue-单向数据流"><a href="#Vue-单向数据流" class="headerlink" title="Vue 单向数据流"></a>Vue 单向数据流</h5><p>数据总是从父组件传到子组件，子组件没有权利修改父组件传过来的数据，只能请求父组件对原始数据的修改</p>
+<h5 id="Vue-双向绑定原理"><a href="#Vue-双向绑定原理" class="headerlink" title="Vue 双向绑定原理"></a>Vue 双向绑定原理</h5><p>MVVM 框架核心，原理是通过<font color="#f5222d">数据劫持+发布订阅模式</font>相结合的方式来是实现的，简单来说就是数据层发生变化的时候，可同布更新视图层，当视图层发生变化的时候，同步更新数据层</p>
+<p>MVVM</p>
+<blockquote>
+<p>View：视图层（UI 用户界面）<br>ViewModel：业务逻辑层（一切 js 可视为业务逻辑，也就是前端的日常工作）<br>Model：数据层（存储数据及对数据的处理如增删改查）</p>
+</blockquote>
+<p>双向绑定的核心：Object.defineProperty()<br>直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。<br>Object.defineProperty的get方法用来获取值， set方法用来拦截设置值</p>
+<p>响应式实现过程：</p>
+<p>1、在Vue data中存入对象数据<br>2、Vue遍历此对象每个property，通过Object.defineProperty()方法进行数据劫持，给每一个property加上getter&#x2F;setter<br>3、每个组件实例都对应一个Watcher实例，会收集所有接触过的property依赖，如果数据有变化，将会收到通知，watcher会使其关联的组件实例改变</p>
+<h5 id="Vue-发布订阅模式"><a href="#Vue-发布订阅模式" class="headerlink" title="Vue 发布订阅模式"></a>Vue 发布订阅模式</h5><p>一种一对多的依赖关系。多个订阅者（一般是注册的函数）同时监听同一个数据对象，当这个数据对象发生变化的时候会执行一个发布事件，通过这个发布事件会通知到所有的订阅者，使它们能够自己改变对数据对象依赖的部分状态。<br>一个完整的订阅发布模式，由发布者、订阅者、消息管理器三部分组成</p>
+<p>在双向数据绑定中 每当有数据发生变化就要发布一个通知 让视图层更新 那么在set函数中就要发布订阅函数 而每一个对象属性都是订阅者</p>
+<h5 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h5><p>不同场景下，堆与栈代表不同的含义。一般情况下，有两层含义：</p>
+<ul>
+<li>程序内存场景下，堆与栈表示两种内存管理方式</li>
+<li>数据结构场景下，堆与栈表示两种常用的数据结构<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/K346K346/article/details/80849966/">https://blog.csdn.net/K346K346/article/details/80849966/</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-React-Hooks" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

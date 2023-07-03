@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2023 | TaoistYang的博客</title>
+  <title>Nginx拓展 | TaoistYang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="碎片收集。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TaoistYang的博客">
-<meta property="og:url" content="http://example.com/archives/2023/index.html">
+  <meta name="description" content="正向代理 VS 反向代理正向代理正向代理 &#x3D;&gt; 客户端将请求发送给代理器，代理服务器去访问真实服务器地址，真实服务器只清楚请求来自哪个代理服务器，而不清楚来自哪个具体的客户端；正向代理模式屏蔽或者隐藏了真实客户端信息。 前提条件 &#x3D;&gt; 客户端必须设置正向代理服务器，知道正向代理服务器的IP地址，还有端口 场景 &#x3D;&gt; 梯子 总结 &#x3D;&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx拓展">
+<meta property="og:url" content="http://example.com/2023/07/03/Nginx%E6%8B%93%E5%B1%95/index.html">
 <meta property="og:site_name" content="TaoistYang的博客">
-<meta property="og:description" content="碎片收集。">
+<meta property="og:description" content="正向代理 VS 反向代理正向代理正向代理 &#x3D;&gt; 客户端将请求发送给代理器，代理服务器去访问真实服务器地址，真实服务器只清楚请求来自哪个代理服务器，而不清楚来自哪个具体的客户端；正向代理模式屏蔽或者隐藏了真实客户端信息。 前提条件 &#x3D;&gt; 客户端必须设置正向代理服务器，知道正向代理服务器的IP地址，还有端口 场景 &#x3D;&gt; 梯子 总结 &#x3D;&gt;">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/statics/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%AF%B9%E6%AF%94.jpg">
+<meta property="og:image" content="http://example.com/statics/%E5%85%B6%E4%BB%96/%E6%AF%94%E8%BE%83.jpg">
+<meta property="og:image" content="http://example.com/statics/%E5%85%B6%E4%BB%96/%E6%B5%81%E7%A8%8B%E9%85%8D%E7%BD%AE.png">
+<meta property="article:published_time" content="2023-07-03T01:23:59.000Z">
+<meta property="article:modified_time" content="2023-07-03T01:48:44.969Z">
 <meta property="article:author" content="TaoistYang">
 <meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/statics/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%AF%B9%E6%AF%94.jpg">
   
     <link rel="alternative" href="/atom.xml" title="TaoistYang的博客" type="application/atom+xml">
   
@@ -147,319 +153,228 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Nginx拓展" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Nginx拓展
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/03/Nginx%E6%8B%93%E5%B1%95/" class="archive-article-date">
+
+        
+        <a href="/2023/07/03/Nginx%E6%8B%93%E5%B1%95/" class="archive-article-date">
   	<time datetime="2023-07-03T01:23:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/03/Nginx%E6%8B%93%E5%B1%95/">Nginx拓展</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="正向代理-VS-反向代理"><a href="#正向代理-VS-反向代理" class="headerlink" title="正向代理 VS 反向代理"></a>正向代理 VS 反向代理</h3><h4 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h4><p>正向代理 &#x3D;&gt; 客户端将请求发送给代理器，代理服务器去访问真实服务器地址，真实服务器只清楚请求来自哪个代理服务器，而不清楚来自哪个具体的客户端；正向代理模式屏蔽或者隐藏了真实客户端信息。</p>
+<p>前提条件 &#x3D;&gt; 客户端必须设置正向代理服务器，知道正向代理服务器的IP地址，还有端口</p>
+<p>场景 &#x3D;&gt; 梯子</p>
+<p>总结 &#x3D;&gt; 正向代理，”它代理的是客户端”，是一个位于客户端和原始服务器（Origin Server）之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标（原始服务器）。<br>然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理</p>
+<p>用途:</p>
+<ul>
+<li>访问原来无法访问的资源，如 Google。</li>
+<li>可以做缓存，加速访问资源。</li>
+<li>对客户端访问授权，上网进行认证。</li>
+<li>代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息。</li>
+</ul>
+<h4 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h4><p>反向代理 &#x3D;&gt; 多个客户端给反向代理服务器发送请求。nginx服务器接收到之后，按照一定规则分发给后端业务处理器进行处理</p>
+<p>此时请求的来源也就是客户端是明确的，但是请求具体由哪台服务器处理的并不明确了，Nginx 扮演的就是一个反向代理角色</p>
+<p>客户端是无感知代理的存在的，反向代理对外都是透明的，访问者并不知道自己访问的是一个代理。因为客户端不需要任何配置就可以访问</p>
+<p>总结 &#x3D;&gt; “它代理的是服务端”，主要用于服务器集群分布式部署的情况下，反向代理隐藏了服务器的信息</p>
+<p>场景 &#x3D;&gt; 分布式部署解决访问次数问题</p>
+<ul>
+<li>保证内网的安全，通常将反向代理作为公网访问地址，Web 服务器是内网。</li>
+<li>负载均衡，通过反向代理服务器来优化网站的负载</li>
+</ul>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>通常情况下，我们在实际项目操作时，正向代理和反向代理很有可能会存在同一个应用场景中，正向代理代理客户端的请求去访问目标服务器，目标服务器是一个反向单利服务器，反向代理了多台真实的业务处理服务器。</p>
+<p><img src="/../statics/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%AF%B9%E6%AF%94.jpg" alt="扩展"></p>
+<p>图例：</p>
+<p><img src="/../statics/%E5%85%B6%E4%BB%96/%E6%AF%94%E8%BE%83.jpg" alt="正向代理"></p>
+<ul>
+<li>在正向代理中，Proxy 和 Client 同属于一个 LAN（图中方框内），隐藏了客户端信息</li>
+<li>在反向代理中，Proxy 和 Server 同属于一个 LAN（图中方框内），隐藏了服务端信息</li>
+</ul>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>概念 &#x3D;&gt; 将服务器接收到的请求按照规则分发的过程，称为负载均衡</p>
+<p>客户端发送的、Nginx 反向代理服务器接收到的请求数量，就是我们说的负载量。请求数量按照一定的规则进行分发，到不同的服务器处理的规则，就是一种均衡规则</p>
+<p>分类 &#x3D;&gt;</p>
+<ul>
+<li><p>硬件负载均衡，也称为硬负载，如 F5 负载均衡，相对造价昂贵成本较高。但是数据的稳定性安全性等等有非常好的保障，如中国移动中国联通这样的公司才会选择硬负载进行操作</p>
+</li>
+<li><p>软件负载均衡，成本低，利用现有的技术结合主机硬件实现的一种消息队列分发机制。</p>
+</li>
+</ul>
+<h4 id="nginx支持的负载均衡调度算法"><a href="#nginx支持的负载均衡调度算法" class="headerlink" title="nginx支持的负载均衡调度算法"></a>nginx支持的负载均衡调度算法</h4><ul>
+<li><p>weight 轮询（默认）<br>  接收到的请求按照顺序逐一分配到不同的后端服务器，即使在使用过程中，某一台后端服务器宕机，Nginx 会自动将该服务器剔除出队列，请求受理情况不会受到任何影响。</p>
+<p>  这种方式下，可以给不同的后端服务器设置一个权重值（weight），用于调整不同的服务器上请求的分配率。</p>
+<p>  权重数据越大，被分配到请求的几率越大；该权重值，主要是针对实际工作环境中不同的后端服务器硬件配置进行调整的</p>
+</li>
+<li><p>ip_hash<br>  每个请求按照发起客户端的 ip 的 hash 结果进行匹配，这样的算法下一个固定 ip 地址的客户端总会访问到同一个后端服务器，这也在一定程度上解决了集群部署环境下 Session 共享的问题。</p>
+</li>
+<li><p>fair<br>  智能调整调度算法，动态的根据后端服务器的请求处理到响应的时间进行均衡分配</p>
+<p>  响应时间短处理效率高的服务器分配到请求的概率高，响应时间长处理效率低的服务器分配到的请求少，它是结合了前两者的优点的一种调度算法</p>
+<p>  但是需要注意的是 Nginx 默认不支持 fair 算法，如果要使用这种调度算法，请安装 upstream_fair 模块</p>
+</li>
+<li><p>url_hash<br>  按照访问的 URL 的 hash 结果分配请求，每个请求的 URL 会指向后端固定的某个服务器，可以在 Nginx 作为静态服务器的情况下提高缓存效率</p>
+<p>  注意 Nginx 默认不支持这种调度算法，要使用的话需要安装 Nginx 的 hash 软件包</p>
+</li>
+</ul>
+<h3 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h3><p>动静分离是为了减少不必要的请求已减少资源的浪费、请求的延时</p>
+<p>场景 &#x3D;&gt; 假如我们所有的前台数据都从后台获取，我们访问百度首页时，如果首页有一张背景图，那么我们每个人每次进入首页时都要去请求接口获取这张背景图，而首页的访问量是巨大的，每次都为了一张背景图去请求同一个接口对于资源的消耗不可计数，为了减少资源的损耗、加快网页的加载速度，动静分离由此而生</p>
+<p>配置 &#x3D;&gt;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location ~ \.(htm|html|js|css|jpg|png|gif|eot|svg|ttf|woff|woff2)$ &#123;  </span><br><span class="line">    root    html;      <span class="comment">//配置静态资源地址</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<h3 id="配置https服务"><a href="#配置https服务" class="headerlink" title="配置https服务"></a>配置https服务</h3><p>流程 &#x3D;&gt;</p>
+<ol>
+<li>申请证书，可以申请三个月免费ssl证书，申请过程请按照官方提示步骤</li>
+<li>申请完成后下载nginx版本的证书至本地，一个crt文件一个key文件，crt为证书，key为密钥</li>
+<li>配置nginx</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">443</span> ssl;    <span class="comment">//监听443端口，因为443端口是https的默认端口。80为http的默认端口</span></span><br><span class="line">    server_name  www.<span class="property">domain</span>.<span class="property">com</span>;    <span class="comment">//配置域名</span></span><br><span class="line">                </span><br><span class="line">    ssl_certificate      证书的绝对路径;</span><br><span class="line">    ssl_certificate_key  密钥的绝对路径;</span><br><span class="line">                </span><br><span class="line">    # location / &#123;        <span class="comment">//反向代理的服务器地址，视情况进行配置</span></span><br><span class="line">    #    proxy_pass   <span class="attr">http</span>:<span class="comment">//112.35.xxx.xxx;</span></span><br><span class="line">    # &#125;          </span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
 
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p><img src="/../statics/%E5%85%B6%E4%BB%96/%E6%B5%81%E7%A8%8B%E9%85%8D%E7%BD%AE.png" alt="配置"></p>
+<ol>
+<li>用户输入<a target="_blank" rel="noopener" href="http://域名,默认80/">http://域名，默认80</a>端口</li>
+<li>nginx监听到80端口被访问，匹配到域名为<a target="_blank" rel="noopener" href="http://www.dream.com,将服务代理到/">www.dream.com，将服务代理到</a><a target="_blank" rel="noopener" href="http://192.168.3.10:8080/">http://192.168.3.10:8080</a></li>
+<li>服务器返回页面资源</li>
+<li>用户输入<a target="_blank" rel="noopener" href="https://二级域名,默认端口为443/">https://二级域名,默认端口为443</a></li>
+<li>nginx监听443端口,匹配到相应域名，进行证书验证，将服务代理到指定服务器</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/07/03/Nginx%E6%8B%93%E5%B1%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-05-04T14:24:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浏览器渲染原理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/">浏览器渲染原理</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" class="archive-article-date">
-  	<time datetime="2023-05-04T13:38:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/05/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器角度看待事件循环</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/28/Javascript-%E7%BB%A7%E6%89%BF/" class="archive-article-date">
-  	<time datetime="2023-04-28T07:56:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/28/Javascript-%E7%BB%A7%E6%89%BF/">Javascript 继承</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/17/TypeScript/" class="archive-article-date">
-  	<time datetime="2023-04-17T03:06:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/17/TypeScript/">TypeScript</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-04-07T09:31:28.320Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/07/React%E8%84%91%E5%9B%BE%E6%95%B4%E7%90%86/">React脑图整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="archive-article-date">
-  	<time datetime="2023-03-22T08:43:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/03/22/%E8%AF%A6%E8%A7%A3Vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">详解Vue双向绑定</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2023-02-27T08:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/27/create-react-app-%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">create-react-app 使用相关知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-02-13T01:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/13/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">知识点整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/06/React-Hooks/" class="archive-article-date">
-  	<time datetime="2023-02-06T03:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/06/React-Hooks/">React Hooks</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/02/02/hexo%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2023-02-02T11:30:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/02/02/hexo%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">hexo基础命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -482,8 +397,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
