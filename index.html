@@ -2250,12 +2250,18 @@
 <p>在一次很早的提交中，将一个储存密码的文件passwords.txt提交到了远程仓库，这时如果只是从远程仓库中删除该文件，别人依然可以通过提交历史找到这个文件，需要从每一个快照中移除该密码文件，用以下命令就可以做到</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --tree-filter <span class="string">&#x27;rm -f passwords.txt&#x27;</span> HEAD</span><br></pre></td></tr></table></figure>
 
-<h3 id="远程协作"><a href="#远程协作" class="headerlink" title="远程协作"></a>远程协作</h3><p>关联本地仓库与远程仓库：<br><code>git remote add origin https://github.com/git地址</code></p>
-<p>推送到远端(首次提交加上参数进行关联，这里采用新型分支名main)<br><code>git push -u origin main</code><br><code>git push origin main</code></p>
-<p>克隆：<br><code>git clone http | ssh | git@...</code></p>
-<p>协作操作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev //创建分支</span><br><span class="line">git branch //查看当前分支</span><br><span class="line">git branch -a //查看所有分支</span><br><span class="line"></span><br><span class="line">git merge //合并本地分支</span><br><span class="line"></span><br><span class="line">git branch -d name //删除分支</span><br><span class="line">git branch -D name //强制删除</span><br><span class="line"></span><br><span class="line">git stash -u //隐藏暂存当前工作区内容</span><br><span class="line">git stash list // 查看暂存工作区列表</span><br><span class="line">git satsh pop stash@&#123;i&#125; //恢复某个stash文件,不带参数默认第一个，该做法会删除对应的stash内容</span><br><span class="line">git stash apply //效果同上，不会删除stash</span><br><span class="line">git stash drop stash@&#123;i&#125; //删除某个stash，不带参数默认第一个</span><br><span class="line"></span><br><span class="line">git remote //查看远程库信息</span><br><span class="line">git remote -v //查看远程库详情</span><br></pre></td></tr></table></figure>
-
+<h3 id="远程协作"><a href="#远程协作" class="headerlink" title="远程协作"></a>远程协作</h3><ul>
+<li><p>场景：多人同时协作目标仓库【注意可能会出现误操作导致代码覆盖问题】</p>
+<p>  关联本地仓库与远程仓库：<br>  <code>git remote add origin https://github.com/git地址</code></p>
+<p>  推送到远端(首次提交加上参数进行关联，这里采用新型分支名main)<br>  <code>git push -u origin main</code><br>  <code>git push origin main</code></p>
+<p>  克隆：<br>  <code>git clone http | ssh | git@...</code></p>
+<p>  协作操作：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev //创建分支</span><br><span class="line">git branch //查看当前分支</span><br><span class="line">git branch -a //查看所有分支</span><br><span class="line"></span><br><span class="line">git merge //合并本地分支</span><br><span class="line"></span><br><span class="line">git branch -d name //删除分支</span><br><span class="line">git branch -D name //强制删除</span><br><span class="line"></span><br><span class="line">git stash -u //隐藏暂存当前工作区内容</span><br><span class="line">git stash list // 查看暂存工作区列表</span><br><span class="line">git satsh pop stash@&#123;i&#125; //恢复某个stash文件,不带参数默认第一个，该做法会删除对应的stash内容</span><br><span class="line">git stash apply //效果同上，不会删除stash</span><br><span class="line">git stash drop stash@&#123;i&#125; //删除某个stash，不带参数默认第一个</span><br><span class="line"></span><br><span class="line">git remote //查看远程库信息</span><br><span class="line">git remote -v //查看远程库详情</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>场景：fork目标仓库到远端个人仓库，所有的变革在本地及远端个人仓库间进行，在开发内容完成后，将开发内容push到远端个人分支，再与目标仓库进行合并【能避免产生误操作问题，只关注个人开发内容即可，缺点为操作繁琐，每次要开发新内容时需要pull目标仓库指定分支，push操作在自己的远程仓库进行，之后再与目标分支merge,减少合并冲突问题】</p>
+<p>  关键操作code：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 与目标仓库连接</span><br><span class="line">git remote add upstream git地址</span><br><span class="line">git remote -V</span><br><span class="line"></span><br><span class="line">// 本地与个人远程仓库操作</span><br><span class="line">git fetch origin branch:branch</span><br><span class="line">git checkout </span><br><span class="line">git pull</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 新需求分支更新</span><br><span class="line">git fetch upstream branch:branch</span><br><span class="line"></span><br><span class="line">// 推送到个人远端分支</span><br><span class="line">git checkout </span><br><span class="line">git push origin branch</span><br><span class="line"></span><br><span class="line">// 所有merge在仓库进行，也可在命令行操作</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h3><ul>
 <li><p>新建代码库</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库  </span></span><br><span class="line">$ git init  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库  </span></span><br><span class="line">$ git init \[project-name\]  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史  </span></span><br><span class="line">$ git <span class="built_in">clone</span> \[url\]</span><br></pre></td></tr></table></figure>
@@ -2268,6 +2274,59 @@
 </li>
 <li><p>代码提交</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区  </span></span><br><span class="line">$ git commit -m \[message\]  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区  </span></span><br><span class="line">$ git commit \[file1\] \[file2\] ... -m \[message\]  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区  </span></span><br><span class="line">$ git commit -a  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息  </span></span><br><span class="line">$ git commit -v  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交  </span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息  </span></span><br><span class="line">$ git commit --amend -m \[message\]  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化  </span></span><br><span class="line">$ git commit --amend \[file1\] \[file2\] ...</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="在本地使用git连接多个github账号"><a href="#在本地使用git连接多个github账号" class="headerlink" title="在本地使用git连接多个github账号"></a>在本地使用git连接多个github账号</h3><p>应用场景：本地git服务连接多个github账户，同时与多个github仓库进行连接</p>
+<h4 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h4><p>本地git账户连接两个账户,分别为 <a href="mailto:&#x6f;&#x6e;&#101;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">&#x6f;&#x6e;&#101;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;</a> 和 <a href="mailto:&#116;&#119;&#111;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#116;&#119;&#111;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#109;</a> ， 此处git安装省略，自行百度</p>
+<ul>
+<li>step1：生成对应的SSH key</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// linux命令，在~/.ssh路径下git bash或者运行命令行，生成文件于该目录。关于.ssh文件夹的生成，自行百度</span><br><span class="line">ssh-keygen -t rsa -C &quot;one@qq.com&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;two@qq.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意不要一路回车，需要对生成的文件夹重命名，如id_rsa_one 和 id_rsa_two,这样会生成四个文件，分别为id_rsa_one、id_rsa_one.pub、id_rsa_two、id_rsa_two.pub(公钥和私钥)</p>
+<ul>
+<li><p>step2：添加私钥</p>
+<ul>
+<li>打开ssh-agent<ul>
+<li>(1) &#x3D;&gt; 官方bash – $ ssh-agent -s</li>
+<li>(2) &#x3D;&gt; 其他 — $ eval $(ssh-agent -s)</li>
+</ul>
+</li>
+<li>分别添加私钥<ul>
+<li>code: $ ssh-add ~&#x2F;.ssh&#x2F;id_rsa_one</li>
+<li>code: $ ssh-add ~&#x2F;.ssh&#x2F;id_rsa_one</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>step3：创建config文件</p>
+<ul>
+<li><p>新建config文件【 $ touch config &#x2F;&#x2F; 在.ssh文件夹下新建config文件】</p>
+</li>
+<li><p>配置config文件(尤其重要)【<em>配置文件可能有格式问题，所以在配置的时候要尤其注意，文件中会附上本机.ssh 文件配置</em>】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># one(one@gmail.com)</span><br><span class="line">    Host one.github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa_one</span><br><span class="line">　　User one</span><br><span class="line"></span><br><span class="line"># two(two@ gmail.com)</span><br><span class="line">    Host two.github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa_two</span><br><span class="line">    User two</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>step4：部署SSH key</p>
+<p>  登陆两个github账户，进入Personal settings –&gt; SSH and GPG keys，点击”new SSH key”，将对应的公钥内容(.pub文件)添加到相应的github账户中</p>
+</li>
+<li><p>step5：远程测试</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T one.github.com</span><br><span class="line">ssh -T two.github.com</span><br></pre></td></tr></table></figure>
+
+<p>  <em>验证成功后，会在.ssh文件中生成known_hostwen文件</em></p>
+<p>  备注：如果测试出现问题,请仔细检查config文件，大概率为格式问题</p>
+</li>
+<li><p>step6：使用</p>
+<ul>
+<li><p>clone到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">code(原写法) =&gt; git clone 官网提供SSH地址</span><br><span class="line">code(现写法) =&gt; git clone git@ one 官网提供SSH地址 //唯一不同就是这个one，此为config里面配置的host</span><br><span class="line">code(现写法) =&gt; git clone git@ two 官网提供SSH地址 //唯一不同就是这个two，此为config里面配置的host</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置局部的用户名和邮箱</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name &quot;one_name&quot; ; git config user.email &quot;one_email&quot;</span><br><span class="line">git config user.name &quot;two_name&quot; ; git config user.email &quot;two_email&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上述完成后，github上钥匙变亮，即完成</p>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支  </span></span><br><span class="line">$ git branch  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 列出所有远程分支  </span></span><br><span class="line">$ git branch -r  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支  </span></span><br><span class="line">$ git branch -a  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支  </span></span><br><span class="line">$ git branch \[branch-name\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支  </span></span><br><span class="line">$ git checkout -b \[branch\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit  </span></span><br><span class="line">$ git branch \[branch\] \[commit\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系  </span></span><br><span class="line">$ git branch --track \[branch\] \[remote-branch\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区  </span></span><br><span class="line">$ git checkout \[branch-name\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 切换到上一个分支  </span></span><br><span class="line">$ git checkout -  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间  </span></span><br><span class="line">$ git branch --set-upstream \[branch\] \[remote-branch\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 合并指定分支到当前分支  </span></span><br><span class="line">$ git merge \[branch\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支  </span></span><br><span class="line">$ git cherry-pick \[commit\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 删除分支  </span></span><br><span class="line">$ git branch -d \[branch-name\]  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 删除远程分支  </span></span><br><span class="line">$ git push origin --delete \[branch-name\]  </span><br><span class="line">$ git branch -dr \[remote/branch\]</span><br></pre></td></tr></table></figure>
 
@@ -2623,7 +2682,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2023 TaoistYang
+    		&copy; 2024 TaoistYang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
