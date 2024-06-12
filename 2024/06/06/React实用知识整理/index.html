@@ -15,11 +15,13 @@
 <meta property="og:site_name" content="TaoistYang的博客">
 <meta property="og:description" content="React 高阶组件、Render props、hooks 高阶组件（HOC）是 React 中用于复用组件逻辑的一种高级技巧。HOC 自身不是 React API 的一部分，它是一种基于 React 的组合特性而形成的设计模式。具体而言，高阶组件是参数为组件，返回值为新组件的函数。 render props是指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术，更具体的">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/statics/img/smzq.webp">
 <meta property="article:published_time" content="2024-06-06T09:58:21.000Z">
-<meta property="article:modified_time" content="2024-06-06T10:00:09.588Z">
+<meta property="article:modified_time" content="2024-06-12T01:51:03.800Z">
 <meta property="article:author" content="TaoistYang">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/statics/img/smzq.webp">
   
     <link rel="alternative" href="/atom.xml" title="TaoistYang的博客" type="application/atom+xml">
   
@@ -371,6 +373,7 @@
 <li>数组 &#x3D;&gt; map &amp;&amp; forEach</li>
 <li>对象 &#x3D;&gt; map &amp;&amp; for in</li>
 </ul>
+<h5 id="React16-x生命周期图"><a href="#React16-x生命周期图" class="headerlink" title="React16.x生命周期图"></a>React16.x生命周期图</h5><p><img src="/../statics/img/smzq.webp" alt="生命周期"></p>
 <h5 id="React-全局数据持久化"><a href="#React-全局数据持久化" class="headerlink" title="React 全局数据持久化"></a>React 全局数据持久化</h5><ul>
 <li><p>使用localStorage &#x3D;&gt; 工作量大，麻烦</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> storage=&#123;</span><br><span class="line">    <span class="comment">// 增加</span></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key, value</span>)&#123;</span><br><span class="line">        <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(key, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(value));</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 获取</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(key));</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 删除</span></span><br><span class="line">    <span class="title function_">remove</span>(<span class="params">key</span>)&#123;</span><br><span class="line">        <span class="variable language_">localStorage</span>.<span class="title function_">removeItem</span>(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Storage</span>;</span><br></pre></td></tr></table></figure>
@@ -481,6 +484,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2024/06/11/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          工具函数
+        
+      </div>
+    </a>
   
   
     <a href="/2024/06/06/Vue%E5%AE%9E%E7%94%A8%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
@@ -635,6 +647,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
             
             <div class="clearfix"></div>
